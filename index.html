@@ -1255,11 +1255,19 @@
     btn.style.opacity = '0.7';
 
     try {
-      await fetch('https://processminerdashboard-production.up.railway.app/api/demo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, company, email, phone }),
-      });
+      // Nasza domena, a gdy nie odpowiada — adres hostingu. Ten sam serwer,
+      // wiec formularz dziala w trakcie przenosin.
+      const bases = ['https://app.processminer.pl', 'https://processminerdashboard-production.up.railway.app'];
+      for (const base of bases) {
+        try {
+          const r = await fetch(base + '/api/demo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, company, email, phone }),
+          });
+          if (r.ok) break;
+        } catch (_) {}
+      }
     } catch (_) {}
 
     form.style.display = 'none';
