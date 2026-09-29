@@ -982,10 +982,13 @@
       <div class="stat-l pl">od instalacji do<br><strong>gotowego backlogu</strong></div>
       <div class="stat-l en">from install to<br><strong>ready backlog</strong></div>
     </div>
-    <div class="rev rev-d1">
-      <div class="stat-n"><span>10</span>h+</div>
-      <div class="stat-l pl">zaoszczędzonych<br><strong>miesięcznie na pracownika</strong></div>
-      <div class="stat-l en">saved per employee<br><strong>every month</strong></div>
+    <!-- Liczba zywa: laczny czas powtarzalnej pracy wykrytej u wszystkich
+         uzytkownikow, od poczatku. Kafelek pokazuje sie dopiero, gdy panel
+         odpowie sensowna wartoscia, zeby na stronie nigdy nie stanelo "0 h". -->
+    <div class="rev rev-d1" id="stat-live" style="display:none">
+      <div class="stat-n"><span id="live-hours">—</span>h</div>
+      <div class="stat-l pl">wykrytej powtarzalnej pracy<br><strong>łącznie od początku</strong></div>
+      <div class="stat-l en">of repetitive work detected<br><strong>total to date</strong></div>
     </div>
     <div class="rev rev-d2">
       <div class="stat-n emerald"><span>0</span></div>
@@ -1130,6 +1133,25 @@
     let wybrany = null;
     try { wybrany = localStorage.getItem('pm_lang'); } catch (e) {}
     if (wybrany === 'pl') setLang('pl');
+  })();
+
+  // Licznik powtarzalnej pracy. Pytamy nasza domene, a gdy nie odpowiada —
+  // adres hostingu; to ten sam panel. Gdy nie odpowie zaden albo liczba jest
+  // zerowa, kafelek po prostu sie nie pokazuje.
+  (async function () {
+    const adresy = ['https://app.processminer.pl', 'https://processminerdashboard-production.up.railway.app'];
+    for (const adres of adresy) {
+      try {
+        const r = await fetch(adres + '/api/public/totals', { signal: AbortSignal.timeout(6000) });
+        if (!r.ok) continue;
+        const d = await r.json();
+        const godziny = Number(d.repetitiveHours || 0);
+        if (!(godziny > 0)) return;
+        document.getElementById('live-hours').textContent = godziny.toLocaleString('pl-PL');
+        document.getElementById('stat-live').style.display = '';
+        return;
+      } catch (e) { /* nastepny adres */ }
+    }
   })();
 
   const moreBtn = document.getElementById('more-btn');
