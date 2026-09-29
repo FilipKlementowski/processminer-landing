@@ -494,6 +494,9 @@
     .footer-logo .logo-mark { width:24px; height:24px; border-radius:6px; display:block; flex-shrink:0; margin-right:9px; }
     .footer-logo span { color:var(--blue); }
     .footer-r { display:flex; align-items:center; gap:28px; }
+    .footer-link { color:#94a3b8; text-decoration:none; font-size:0.8125rem; }
+    .footer-link:hover { color:white; }
+    .footer-link:focus-visible { outline: 2px solid var(--blue); outline-offset:2px; border-radius:2px; }
     .footer-email { color:var(--blue); text-decoration:none; font-family:'Fira Code',monospace; font-size:0.8125rem; }
     .footer-email:hover { text-decoration:underline; }
     .footer-email:focus-visible { outline: 2px solid var(--blue); outline-offset:2px; border-radius:2px; }
@@ -565,6 +568,7 @@
       <a href="#features" class="nav-link"><span class="pl">Funkcje</span><span class="en">Features</span></a>
       <a href="#demo" class="nav-link">Demo</a>
 <a href="#faq" class="nav-link">FAQ</a>
+      <a href="/prywatnosc.html" class="nav-link"><span class="pl">Prywatność</span><span class="en">Privacy</span></a>
     </nav>
     <div class="nav-right">
       <div class="lang-pill" role="group" aria-label="Language">
@@ -1071,6 +1075,10 @@
         <span class="pl">Brak zobowiązań. Odpiszemy w ciągu 24h.</span>
         <span class="en">No commitment. Reply within 24 hours.</span>
       </p>
+      <p style="text-align:center;font-size:0.75rem;line-height:1.6;color:var(--ink-light);margin:10px auto 0;max-width:46ch;">
+        <span class="pl">Twoje dane wykorzystamy tylko po to, żeby odpisać i umówić rozmowę. Szczegóły w <a href="/prywatnosc.html" style="color:var(--blue-dark);">polityce prywatności</a>.</span>
+        <span class="en">We use what you enter only to reply and arrange a call. Details in the <a href="/prywatnosc.html" style="color:var(--blue-dark);">privacy policy</a>.</span>
+      </p>
     </form>
 
     <div class="ty" id="ty">
@@ -1098,7 +1106,8 @@
       </svg>
       Process<span>Miner</span></div>
     <div class="footer-r">
-      <a href="mailto:hello@processminer.io" class="footer-email">hello@processminer.io</a>
+      <a href="/prywatnosc.html" class="footer-link"><span class="pl">Polityka prywatności</span><span class="en">Privacy policy</span></a>
+      <a href="mailto:info@processminer.pl" class="footer-email">info@processminer.pl</a>
       <span class="footer-copy">© 2026 ProcessMiner</span>
     </div>
   </div>
@@ -1113,7 +1122,15 @@
     document.getElementById('btn-en').classList.toggle('active', isEn);
     document.getElementById('btn-pl').setAttribute('aria-pressed', String(!isEn));
     document.getElementById('btn-en').setAttribute('aria-pressed', String(isEn));
+    // Zapamietane, zeby polityka prywatnosci otwierala sie w tym samym jezyku,
+    // ktory ktos wybral tutaj.
+    try { localStorage.setItem('pm_lang', lang); } catch (e) {}
   }
+  (function () {
+    let wybrany = null;
+    try { wybrany = localStorage.getItem('pm_lang'); } catch (e) {}
+    if (wybrany === 'pl') setLang('pl');
+  })();
 
   const moreBtn = document.getElementById('more-btn');
   moreBtn.addEventListener('mouseenter', () => { moreBtn.style.background = 'var(--surface)'; moreBtn.style.color = 'var(--ink)'; });

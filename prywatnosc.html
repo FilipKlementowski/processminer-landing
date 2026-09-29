@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polityka prywatności — ProcessMiner</title>
+  <meta name="description" content="Jakie dane zbiera ProcessMiner, po co, komu je przekazuje i jakie masz prawa.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='1' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%236C63FF'/%3E%3Cstop offset='1' stop-color='%2300D4FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='%2312121A'/%3E%3Crect x='6' y='6' width='500' height='500' rx='122' fill='none' stroke='%236C63FF' stroke-opacity='.55' stroke-width='8'/%3E%3Crect x='117' y='299' width='70' height='107' rx='34' fill='%236C63FF'/%3E%3Crect x='221' y='224' width='70' height='181' rx='34' fill='url(%23b)'/%3E%3Crect x='324' y='139' width='70' height='267' rx='34' fill='%2300D4FF'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { -webkit-font-smoothing: antialiased; }
+
+    /* Te same zmienne co na stronie glownej — podstrony maja wygladac jak jej
+       czesc, a nie jak zalacznik doklejony z innego swiata. */
+    :root {
+      --blue: #3b82f6;
+      --blue-dark: #2563eb;
+      --ink: #0f172a;
+      --ink-mid: #334155;
+      --ink-light: #64748b;
+      --surface: #f1f5f9;
+      --border: #e2e8f0;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    body.lang-en .pl { display: none !important; }
+    body:not(.lang-en) .en { display: none !important; }
+
+    /* ─── Belka gorna ─── */
+    .top {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .top-inner {
+      max-width: 860px; margin: 0 auto; padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .back {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--ink); text-decoration: none;
+      font-weight: 800; font-size: 1.0625rem; letter-spacing: -0.03em;
+    }
+    .back .logo-mark { width: 24px; height: 24px; border-radius: 6px; display: block; flex-shrink: 0; }
+    .back .acc { color: var(--blue); }
+    .back:hover { opacity: 0.75; }
+    .back:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+    .lang-pill {
+      display: inline-flex; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 999px; padding: 3px;
+    }
+    .lang-btn {
+      border: 0; background: none; cursor: pointer; font-family: inherit;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--ink-light); padding: 4px 11px; border-radius: 999px;
+    }
+    .lang-btn.active { background: var(--white); color: var(--ink); box-shadow: 0 1px 3px rgba(15,23,42,0.1); }
+    .lang-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+    /* ─── Dokument ─── */
+    .doc { max-width: 860px; margin: 0 auto; padding: 56px 28px 80px; }
+
+    .doc-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 2.5rem); font-weight: 800;
+      letter-spacing: -0.035em; line-height: 1.15; text-wrap: balance;
+      margin-bottom: 16px;
+    }
+    .lead { font-size: 1.0625rem; color: var(--ink-mid); max-width: 62ch; }
+    .updated {
+      margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border);
+      font-size: 0.8125rem; color: var(--ink-light);
+      font-family: 'Fira Code', monospace;
+    }
+
+    h2 {
+      font-size: 1.1875rem; font-weight: 700; letter-spacing: -0.02em;
+      margin: 46px 0 14px; scroll-margin-top: 80px;
+      display: flex; gap: 12px; align-items: baseline;
+    }
+    h2 .num {
+      font-family: 'Fira Code', monospace; font-size: 0.8125rem; font-weight: 500;
+      color: var(--blue); flex-shrink: 0;
+    }
+    h3 { font-size: 0.98rem; font-weight: 700; margin: 26px 0 8px; color: var(--ink); }
+
+    p { color: var(--ink-mid); margin-bottom: 14px; max-width: 68ch; }
+    a { color: var(--blue-dark); }
+    a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 2px; }
+
+    ul { margin: 0 0 16px 0; padding-left: 0; list-style: none; max-width: 68ch; }
+    li {
+      color: var(--ink-mid); margin-bottom: 10px; padding-left: 22px; position: relative;
+    }
+    li::before {
+      content: ''; position: absolute; left: 4px; top: 0.72em;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--blue); opacity: 0.55;
+    }
+    li strong { color: var(--ink); font-weight: 600; }
+
+    .box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 26px; margin: 18px 0 8px;
+    }
+    .box p:last-child, .box ul:last-child, .box ul:last-child li:last-child { margin-bottom: 0; }
+
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 20px; font-size: 0.9rem; }
+    .table-wrap { overflow-x: auto; }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { font-weight: 700; color: var(--ink); font-size: 0.8rem; letter-spacing: 0.03em; text-transform: uppercase; }
+    td { color: var(--ink-mid); }
+
+    /* ─── Stopka ─── */
+    .footer { background: var(--ink); padding: 32px 0; margin-top: 40px; }
+    .footer-inner {
+      max-width: 860px; margin: 0 auto; padding: 0 28px;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .footer-logo { font-size: 1rem; font-weight: 800; letter-spacing: -0.03em; color: white; }
+    .footer-logo span { color: var(--blue); }
+    .footer-r { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .footer-r a { color: var(--blue); text-decoration: none; font-size: 0.8125rem; }
+    .footer-r a:hover { text-decoration: underline; }
+    .footer-copy { font-size: 0.8125rem; color: #3d4d60; }
+
+    @media (max-width: 640px) {
+      .doc { padding: 40px 20px 60px; }
+      .top-inner { padding: 12px 20px; }
+      h2 { margin-top: 38px; }
+    }
+  </style>
+</head>
+<body class="lang-en">
+
+<div class="top">
+  <div class="top-inner">
+    <a href="/" class="back">
+      <svg class="logo-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="pmTop" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#6C63FF"/><stop offset="1" stop-color="#00D4FF"/></linearGradient></defs>
+        <rect width="512" height="512" rx="128" fill="#12121A"/>
+        <rect x="6" y="6" width="500" height="500" rx="122" fill="none" stroke="#6C63FF" stroke-opacity=".55" stroke-width="8"/>
+        <rect x="117" y="299" width="70" height="107" rx="34" fill="#6C63FF"/>
+        <rect x="221" y="224" width="70" height="181" rx="34" fill="url(#pmTop)"/>
+        <rect x="324" y="139" width="70" height="267" rx="34" fill="#00D4FF"/>
+      </svg>
+      Process<span class="acc">Miner</span>
+    </a>
+    <div class="lang-pill" role="group" aria-label="Język / Language">
+      <button class="lang-btn" id="btn-pl" onclick="setLang('pl')" aria-pressed="false">PL</button>
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+    </div>
+  </div>
+</div>
+
+<main class="doc">
+
+  <div class="doc-eyebrow pl">Polityka prywatności</div>
+  <div class="doc-eyebrow en">Privacy policy</div>
+
+  <h1 class="pl">Co zbieramy, po co i kto to widzi</h1>
+  <h1 class="en">What we collect, why, and who sees it</h1>
+
+  <p class="lead pl">Ten dokument opisuje dwie różne sytuacje: wypełnienie formularza na tej stronie oraz korzystanie z aplikacji ProcessMiner. Zakres danych jest w nich zupełnie inny, więc opisujemy je osobno.</p>
+  <p class="lead en">This document covers two separate situations: filling in the form on this website, and using the ProcessMiner application. The data involved differs completely, so each is described on its own.</p>
+
+  <div class="updated">
+    <span class="pl">Ostatnia aktualizacja: 20 września 2026</span>
+    <span class="en">Last updated: 20 September 2026</span>
+  </div>
+
+  <!-- 1 -->
+  <h2><span class="num">01</span><span class="pl">Kto odpowiada za Twoje dane</span><span class="en">Who is responsible for your data</span></h2>
+
+  <div class="box">
+    <p class="pl"><strong>Administratorem danych jest ProcessMiner</strong>, twórca aplikacji i panelu opisanych poniżej.<br>
+      Kontakt w sprawach danych osobowych: <a href="mailto:info@processminer.pl">info@processminer.pl</a>
+    </p>
+    <p class="en"><strong>The data controller is ProcessMiner</strong>, the maker of the application and dashboard described below.<br>
+      Contact for data protection matters: <a href="mailto:info@processminer.pl">info@processminer.pl</a>
+    </p>
+  </div>
+
+  <p class="pl">W sprawach dotyczących danych osobowych — dostępu, poprawienia, usunięcia — pisz na powyższy adres. Odpowiadamy w ciągu 30 dni.</p>
+  <p class="en">For anything concerning personal data — access, correction, deletion — write to the address above. We respond within 30 days.</p>
+
+  <h3 class="pl">Gdy ProcessMinera wdraża Twój pracodawca</h3>
+  <h3 class="en">When your employer deploys ProcessMiner</h3>
+  <p class="pl">Jeśli używasz aplikacji w pracy, to <strong>Twój pracodawca decyduje</strong>, po co zbiera te dane i co z nimi robi — jest ich administratorem. My przetwarzamy je na jego zlecenie, jako podmiot przetwarzający. Pytania o cel obserwacji i o to, kto w firmie ma wgląd w panel, kieruj więc najpierw do pracodawcy.</p>
+  <p class="en">If you use the application at work, <strong>your employer decides</strong> why this data is collected and what happens to it — they are its controller. We process it on their instructions, as a processor. Questions about the purpose of the monitoring, and about who inside the company can see the dashboard, go to your employer first.</p>
+
+  <!-- 2 -->
+  <h2><span class="num">02</span><span class="pl">Formularz na tej stronie</span><span class="en">The form on this website</span></h2>
+
+  <p class="pl">Formularz kontaktowy zbiera cztery pola: <strong>imię i nazwisko, nazwę firmy, adres e-mail i numer telefonu</strong>. Numer telefonu jest nieobowiązkowy.</p>
+  <p class="en">The contact form collects four fields: <strong>name, company name, email address and phone number</strong>. The phone number is optional.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><span class="pl">Po co</span><span class="en">Purpose</span></th>
+          <th><span class="pl">Podstawa prawna</span><span class="en">Legal basis</span></th>
+          <th><span class="pl">Jak długo</span><span class="en">Retention</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pl">Odesłanie potwierdzenia i linku do rezerwacji terminu rozmowy</span><span class="en">Sending a confirmation and a link to book a call</span></td>
+          <td><span class="pl">Twoja prośba o kontakt — art. 6 ust. 1 lit. b RODO (działania przed zawarciem umowy)</span><span class="en">Your request for contact — Art. 6(1)(b) GDPR (steps prior to a contract)</span></td>
+          <td><span class="pl">Do 12 miesięcy od ostatniego kontaktu</span><span class="en">Up to 12 months from the last contact</span></td>
+        </tr>
+        <tr>
+          <td><span class="pl">Rozmowa handlowa i dalszy kontakt w jej sprawie</span><span class="en">The sales conversation and follow-up</span></td>
+          <td><span class="pl">Nasz prawnie uzasadniony interes — art. 6 ust. 1 lit. f RODO</span><span class="en">Our legitimate interest — Art. 6(1)(f) GDPR</span></td>
+          <td><span class="pl">Do zgłoszenia sprzeciwu</span><span class="en">Until you object</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="pl">Dane z formularza trafiają na nasz serwer i do systemu wysyłki poczty, który nadaje wiadomość potwierdzającą. <strong>Nie budujemy z nich bazy marketingowej</strong> i nie przekazujemy ich nikomu poza dostawcami wymienionymi w punkcie 05.</p>
+  <p class="en">Form data reaches our server and the email service that sends the confirmation message. <strong>We do not build a marketing database from it</strong> and we do not pass it to anyone beyond the providers listed in section 05.</p>
+
+  <p class="pl">Jeden sprzeciw wystarczy: napisz na adres kontaktowy, że nie chcesz dalszego kontaktu, a usuwamy Twoje dane i nie odzywamy się ponownie.</p>
+  <p class="en">One objection is enough: write to the contact address saying you do not want further contact, and we delete your data and do not write again.</p>
+
+  <!-- 3 -->
+  <h2><span class="num">03</span><span class="pl">Aplikacja ProcessMiner</span><span class="en">The ProcessMiner application</span></h2>
+
+  <p class="pl">Aplikacja obserwuje, w jakich programach pracujesz i jakie czynności powtarzasz, żeby wskazać, co da się zautomatyzować. Analiza dotyczy procesów, nie oceny Twojej pracy. Przed pierwszym uruchomieniem aplikacja pokazuje te same informacje na ekranie zgody i bez jej zaznaczenia nie nagrywa niczego.</p>
+  <p class="en">The application observes which programs you work in and which activities you repeat, in order to point out what could be automated. The analysis is about processes, not about rating your performance. Before it first runs, the application shows this same information on a consent screen, and without that consent it records nothing.</p>
+
+  <h3 class="pl">Co zostaje wyłącznie na Twoim komputerze</h3>
+  <h3 class="en">What stays on your computer only</h3>
+  <p class="pl">Pełny zapis przebiegu pracy, sekunda po sekundzie: każde przełączenie między aplikacjami, tytuły okien, kliknięcia myszą wraz z pozycją, liczba naciśniętych klawiszy, czas bezczynności oraz pierwsze 80 znaków tego, co kopiujesz. Ten plik nie opuszcza komputera — poza niego trafia tylko to, co wymienione niżej.</p>
+  <p class="en">A full second-by-second log of what happened: every switch between applications, window titles, mouse clicks and their positions, how many keys you pressed, idle time, and the first 80 characters of anything you copy. This file never leaves the computer — only what is listed below is sent anywhere.</p>
+
+  <h3 class="pl">Co jest wysyłane na panel — pięć rzeczy i nic poza nimi</h3>
+  <h3 class="en">What is sent to the dashboard — five things and nothing else</h3>
+  <ul>
+    <li><span class="pl"><strong>Kim jesteś:</strong> konto Google (adres e-mail, imię i nazwisko, zdjęcie profilowe), nazwa firmy, numer telefonu jeśli go podasz, oraz wersja aplikacji.</span><span class="en"><strong>Who you are:</strong> your Google account (email address, name, profile picture), your company name, your phone number if you gave one, and the app version.</span></li>
+    <li><span class="pl"><strong>Jak wyglądał Twój dzień:</strong> minuta po minucie, która aplikacja była na wierzchu, za ostatnie 14 dni — oś czasu dnia, nie suma.</span><span class="en"><strong>How your day ran:</strong> minute by minute, which application was in front, for the last 14 days — a timeline of the day, not a total.</span></li>
+    <li><span class="pl"><strong>Co się powtarza:</strong> wykryte czynności — skrócone tytuły okien i dokumentów (nazwa arkusza, rdzeń tematu maila), domena strony, użyte aplikacje, jak często i w które dni, oraz profil akcji: liczba naciśnięć klawiszy, kliknięć i przewinięć wraz z użytymi skrótami klawiszowymi.</span><span class="en"><strong>What repeats:</strong> the detected activities — shortened window and document titles (a spreadsheet name, the root of an email subject), the website domain, the applications involved, how often and on which days, plus an action profile: keystroke, click and scroll counts and the keyboard shortcuts used.</span></li>
+    <li><span class="pl"><strong>Procesy, które sam oznaczysz:</strong> jeśli naciśniesz Start i Stop, wysyłany jest cały przebieg — nazwa, czas, oraz każdy krok z tytułem okna, czasem trwania i liczbą wpisanych znaków. Jeśli w trakcie takiego nagrania coś skopiujesz, pierwsze 80 znaków skopiowanego tekstu może pojawić się jako krok.</span><span class="en"><strong>Processes you mark yourself:</strong> if you press Start and Stop, the whole run is sent — its name, when it ran, and each step with its window title, duration and how many characters you typed. If you copy something during such a recording, the first 80 characters of the copied text can appear as a step.</span></li>
+    <li><span class="pl"><strong>Do dostawcy AI:</strong> żeby opisać proponowaną automatyzację, nazwa czynności, aplikacje i profil akcji przechodzą przez nasz serwer do zewnętrznego dostawcy modelu. Surowy zapis z Twojego komputera nigdy tam nie trafia.</span><span class="en"><strong>To an AI provider:</strong> to write the description of a proposed automation, the activity name, the applications and the action profile pass through our server to an external model provider. Your raw log never goes there.</span></li>
+  </ul>
+
+  <p class="pl">Podstawą jest Twoja zgoda wyrażona na ekranie startowym — art. 6 ust. 1 lit. a RODO — a gdy aplikację wdraża pracodawca, także jego prawnie uzasadniony interes w usprawnianiu procesów (art. 6 ust. 1 lit. f RODO).</p>
+  <p class="en">The basis is your consent given on the start-up screen — Art. 6(1)(a) GDPR — and, where the application is deployed by an employer, also their legitimate interest in improving processes (Art. 6(1)(f) GDPR).</p>
+
+  <!-- 4 -->
+  <h2><span class="num">04</span><span class="pl">Czego aplikacja nie zbiera</span><span class="en">What the application never collects</span></h2>
+
+  <div class="box">
+    <ul>
+      <li><span class="pl"><strong>Zrzutów ekranu</strong> — aplikacja ich nie robi. Nie są wyłączone w ustawieniach: kod, który je wykonywał, został z niej usunięty.</span><span class="en"><strong>Screenshots</strong> — the application does not take them. They are not merely switched off in settings: the code that took them was removed.</span></li>
+      <li><span class="pl"><strong>Treści tego, co piszesz</strong> — zapisywana jest wyłącznie liczba znaków, nigdy słowa.</span><span class="en"><strong>The text you type</strong> — only the number of characters is recorded, never the words.</span></li>
+      <li><span class="pl"><strong>Treści maili, dokumentów i stron</strong> — poza tym, co widać w tytule okna.</span><span class="en"><strong>The contents of emails, documents and web pages</strong> — beyond what is visible in the window title.</span></li>
+      <li><span class="pl"><strong>Haseł</strong> — aplikacja nie zapisuje wpisywanych znaków, więc nie zapisuje też haseł.</span><span class="en"><strong>Passwords</strong> — the application does not record typed characters, so it does not record passwords either.</span></li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <h2><span class="num">05</span><span class="pl">Komu przekazujemy dane</span><span class="en">Who we share data with</span></h2>
+
+  <p class="pl">Nie sprzedajemy danych i nie udostępniamy ich do celów reklamowych. Korzystamy natomiast z dostawców, bez których usługa nie mogłaby działać:</p>
+  <p class="en">We do not sell data and we do not share it for advertising. We do, however, rely on providers without whom the service could not run:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><span class="pl">Dostawca</span><span class="en">Provider</span></th>
+          <th><span class="pl">Rola</span><span class="en">Role</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Railway</td>
+          <td><span class="pl">Serwer, na którym stoi panel i baza</span><span class="en">The server hosting the dashboard and database</span></td>
+        </tr>
+        <tr>
+          <td>Google</td>
+          <td><span class="pl">Logowanie kontem Google do aplikacji i panelu</span><span class="en">Google sign-in for the application and dashboard</span></td>
+        </tr>
+        <tr>
+          <td>Anthropic</td>
+          <td><span class="pl">Model AI opisujący proponowane automatyzacje</span><span class="en">The AI model that writes the automation proposals</span></td>
+        </tr>
+        <tr>
+          <td>Resend / Amazon SES</td>
+          <td><span class="pl">Wysyłka wiadomości e-mail</span><span class="en">Sending email messages</span></td>
+        </tr>
+        <tr>
+          <td>Netlify</td>
+          <td><span class="pl">Hosting tej strony</span><span class="en">Hosting for this website</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="pl">Dostęp do panelu Twojej firmy mają osoby, którym Twoja firma go nadała, oraz agencja prowadząca wdrożenie. Nie mają go Twoi koledzy z pracy, jeśli firma im go nie przyznała.</p>
+  <p class="en">Your company dashboard is accessible to the people your company granted access to, and to the agency running the deployment. Your colleagues do not have it unless the company granted it to them.</p>
+
+  <p class="pl">Część dostawców przetwarza dane poza Europejskim Obszarem Gospodarczym. Odbywa się to na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską.</p>
+  <p class="en">Some providers process data outside the European Economic Area. This takes place under standard contractual clauses approved by the European Commission.</p>
+
+  <!-- 6 -->
+  <h2><span class="num">06</span><span class="pl">Jak długo trzymamy dane</span><span class="en">How long we keep data</span></h2>
+  <ul>
+    <li><span class="pl"><strong>Oś czasu dnia:</strong> 14 dni — starsze wpisy znikają same.</span><span class="en"><strong>The daily timeline:</strong> 14 days — older entries drop off by themselves.</span></li>
+    <li><span class="pl"><strong>Wykryte czynności i propozycje:</strong> przez czas korzystania z usługi przez Twoją firmę.</span><span class="en"><strong>Detected activities and proposals:</strong> for as long as your company uses the service.</span></li>
+    <li><span class="pl"><strong>Zapis na Twoim komputerze:</strong> do odinstalowania aplikacji — usunięcie aplikacji kasuje jej dane lokalne.</span><span class="en"><strong>The log on your computer:</strong> until you uninstall the application — removing it deletes its local data.</span></li>
+    <li><span class="pl"><strong>Dane z formularza:</strong> do 12 miesięcy od ostatniego kontaktu.</span><span class="en"><strong>Form data:</strong> up to 12 months from the last contact.</span></li>
+  </ul>
+
+  <!-- 7 -->
+  <h2><span class="num">07</span><span class="pl">Twoje prawa</span><span class="en">Your rights</span></h2>
+
+  <p class="pl">Masz prawo dostępu do swoich danych, ich sprostowania, usunięcia i ograniczenia przetwarzania, prawo do przenoszenia danych oraz prawo sprzeciwu wobec przetwarzania opartego na prawnie uzasadnionym interesie. Zgodę możesz wycofać w każdej chwili — wycofanie nie wpływa na zgodność z prawem tego, co wydarzyło się wcześniej.</p>
+  <p class="en">You have the right to access your data, to have it corrected, deleted or its processing restricted, the right to data portability, and the right to object to processing based on legitimate interest. You can withdraw consent at any time — withdrawal does not affect the lawfulness of what happened before it.</p>
+
+  <p class="pl">W samej aplikacji masz to pod ręką: przyciskiem <strong>Pauza</strong> wstrzymujesz nagrywanie w dowolnym momencie, a aplikację możesz zamknąć lub odinstalować. Dostęp może też zostać odebrany zdalnie — nagrywanie zatrzymuje się wtedy samo.</p>
+  <p class="en">Inside the application this is close at hand: the <strong>Pause</strong> button stops recording at any moment, and you can close or uninstall the app. Access can also be withdrawn remotely — recording then stops on its own.</p>
+
+  <p class="pl">Jeśli uważasz, że przetwarzamy dane niezgodnie z prawem, możesz złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa, <a href="https://uodo.gov.pl" target="_blank" rel="noopener">uodo.gov.pl</a>).</p>
+  <p class="en">If you believe we process data unlawfully, you may lodge a complaint with the President of the Personal Data Protection Office in Poland (ul. Stawki 2, 00-193 Warsaw, <a href="https://uodo.gov.pl" target="_blank" rel="noopener">uodo.gov.pl</a>).</p>
+
+  <!-- 8 -->
+  <h2><span class="num">08</span><span class="pl">Ciasteczka</span><span class="en">Cookies</span></h2>
+  <p class="pl">Ta strona nie używa ciasteczek ani innych znaczników śledzących — dlatego nie zobaczysz na niej okienka o zgodzie na ciasteczka. Panel po zalogowaniu przechowuje w przeglądarce token sesji, bez którego nie dałoby się utrzymać zalogowania.</p>
+  <p class="en">This website uses no cookies and no tracking markers — which is why you will not see a cookie consent banner on it. Once you sign in, the dashboard keeps a session token in your browser, without which staying signed in would not be possible.</p>
+
+  <!-- 9 -->
+  <h2><span class="num">09</span><span class="pl">Zmiany</span><span class="en">Changes</span></h2>
+  <p class="pl">Jeśli zmienimy zakres zbieranych danych, zmienimy też ten dokument i datę na górze. Zmiany istotne dla użytkowników aplikacji pokażemy dodatkowo na ekranie zgody przy najbliższym uruchomieniu.</p>
+  <p class="en">If we change what data is collected, we change this document and the date at the top as well. Changes that matter to users of the application will also be shown on the consent screen the next time it starts.</p>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Process<span>Miner</span></div>
+    <div class="footer-r">
+      <a href="/"><span class="pl">Strona główna</span><span class="en">Home</span></a>
+      <a href="mailto:info@processminer.pl">info@processminer.pl</a>
+      <span class="footer-copy">© 2026 ProcessMiner</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    const isEn = lang === 'en';
+    document.body.classList.toggle('lang-en', isEn);
+    document.documentElement.lang = isEn ? 'en' : 'pl';
+    const pl = document.getElementById('btn-pl'), en = document.getElementById('btn-en');
+    pl.classList.toggle('active', !isEn); en.classList.toggle('active', isEn);
+    pl.setAttribute('aria-pressed', String(!isEn)); en.setAttribute('aria-pressed', String(isEn));
+    try { localStorage.setItem('pm_lang', lang); } catch (e) {}
+  }
+  // Jezyk wybrany na stronie glownej ma obowiazywac i tutaj; gdy nic nie
+  // wybrano, decyduje jezyk przegladarki.
+  (function () {
+    let wybrany = null;
+    try { wybrany = localStorage.getItem('pm_lang'); } catch (e) {}
+    // Brak zapamietanego wyboru znaczy, ze ktos trafil tu prosto z linku —
+    // wtedy jezyk jest ten sam co domyslny na stronie glownej.
+    setLang(wybrany === 'pl' ? 'pl' : 'en');
+  })();
+</script>
+
+</body>
+</html>
