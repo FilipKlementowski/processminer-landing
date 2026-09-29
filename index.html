@@ -437,11 +437,39 @@
     }
     .feat-desc { font-size: 0.9375rem; color: var(--ink-mid); line-height: 1.65; }
 
+    /* ─── LICZNIK ───
+       Osobny pas zaraz pod naglowkiem: liczba ma byc pierwszym dowodem, jaki
+       widzi ktos, kto dopiero co przeczytal obietnice. */
+    .count-sec { background: var(--ink); padding: 104px 0; position: relative; overflow: hidden; }
+    /* Delikatna poswiata od gory, zeby liczba nie wisiala na plaskiej czerni. */
+    .count-sec::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(62% 120% at 50% 0%, rgba(59,130,246,0.20), transparent 70%);
+    }
+    .count-inner { position: relative; max-width: 900px; margin: 0 auto; padding: 0 28px; text-align: center; }
+    .count-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #60a5fa; margin-bottom: 24px;
+    }
+    .count-n {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(4rem, 13vw, 9rem); font-weight: 800; letter-spacing: -0.055em;
+      line-height: 0.92; color: white; font-variant-numeric: tabular-nums;
+    }
+    .count-n .unit { color: var(--blue); }
+    .count-l { margin-top: 22px; font-size: clamp(1rem, 2.2vw, 1.3rem); color: #94a3b8; line-height: 1.55; }
+    .count-l strong { color: white; font-weight: 700; }
+    .count-foot {
+      margin-top: 28px; font-family: 'Fira Code', monospace;
+      font-size: 0.75rem; color: #475569; letter-spacing: 0.02em;
+    }
+
     /* ─── STATS ─── */
     .stats-sec { background: var(--ink); padding: 80px 0; }
     .stats-grid {
       max-width: 1200px; margin: 0 auto; padding: 0 48px;
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; text-align: center;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 48px; text-align: center;
     }
     .stat-n {
       font-family: 'Inter', system-ui, sans-serif;
@@ -768,6 +796,23 @@
   </div>
 </div>
 
+<!-- ─── LICZNIK ───
+     Caly pas pokazuje sie dopiero, gdy panel odda wartosc wieksza od zera.
+     Pusta sekcja albo "0 h" na stronie glownej wygladalaby gorzej niz jej brak. -->
+<div class="count-sec" id="count-sec" style="display:none">
+  <div class="count-inner">
+    <div class="count-eyebrow pl">Licznik</div>
+    <div class="count-eyebrow en">Live counter</div>
+    <div class="count-n"><span id="count-n">0</span><span class="unit">h</span></div>
+    <p class="count-l pl">powtarzalnej pracy wykrytej u wszystkich użytkowników,<br><strong>łącznie od początku</strong></p>
+    <p class="count-l en">of repetitive work detected across every user,<br><strong>total to date</strong></p>
+    <div class="count-foot">
+      <span class="pl">aktualizowane codziennie</span><span class="en">updated daily</span>
+      <span id="count-date"></span>
+    </div>
+  </div>
+</div>
+
 <!-- ─── HOW IT WORKS ─── -->
 <div id="how" class="sec-bg">
   <div class="wrap">
@@ -982,14 +1027,6 @@
       <div class="stat-l pl">od instalacji do<br><strong>gotowego backlogu</strong></div>
       <div class="stat-l en">from install to<br><strong>ready backlog</strong></div>
     </div>
-    <!-- Liczba zywa: laczny czas powtarzalnej pracy wykrytej u wszystkich
-         uzytkownikow, od poczatku. Kafelek pokazuje sie dopiero, gdy panel
-         odpowie sensowna wartoscia, zeby na stronie nigdy nie stanelo "0 h". -->
-    <div class="rev rev-d1" id="stat-live" style="display:none">
-      <div class="stat-n"><span id="live-hours">—</span>h</div>
-      <div class="stat-l pl">wykrytej powtarzalnej pracy<br><strong>łącznie od początku</strong></div>
-      <div class="stat-l en">of repetitive work detected<br><strong>total to date</strong></div>
-    </div>
     <div class="rev rev-d2">
       <div class="stat-n emerald"><span>0</span></div>
       <div class="stat-l pl">zrzutów ekranu<br><strong>i zapisanych znaków</strong></div>
@@ -1135,9 +1172,48 @@
     if (wybrany === 'pl') setLang('pl');
   })();
 
+  // Liczba dobiega do swojej wartosci dopiero, gdy sekcja wejdzie w pole
+  // widzenia: policzenie jej w tle, zanim ktokolwiek patrzy, marnuje jedyny
+  // moment, w ktorym ten ruch cos wnosi.
+  function pokazLicznik(godziny, kiedy) {
+    const sekcja = document.getElementById('count-sec');
+    const pole = document.getElementById('count-n');
+    const data = document.getElementById('count-date');
+    if (kiedy) {
+      const d = new Date(kiedy);
+      if (!isNaN(d)) data.textContent = ' · ' + d.toISOString().slice(0, 10);
+    }
+    sekcja.style.display = '';
+
+    const skromnie = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const napisz = (n) => { pole.textContent = Math.round(n).toLocaleString('pl-PL'); };
+    if (skromnie) { napisz(godziny); return; }
+
+    napisz(0);
+    let ruszyl = false;
+    const licz = () => {
+      if (ruszyl) return;
+      ruszyl = true;
+      const czas = 1100, start = performance.now();
+      const krok = (teraz) => {
+        const p = Math.min((teraz - start) / czas, 1);
+        // Szybko na poczatku, miekko na koncu — liczba ma wyladowac, nie stanac.
+        napisz(godziny * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(krok);
+      };
+      requestAnimationFrame(krok);
+    };
+
+    if (!('IntersectionObserver' in window)) { licz(); return; }
+    const obserwator = new IntersectionObserver((wpisy) => {
+      for (const w of wpisy) if (w.isIntersecting) { licz(); obserwator.disconnect(); }
+    }, { threshold: 0.35 });
+    obserwator.observe(sekcja);
+  }
+
   // Licznik powtarzalnej pracy. Pytamy nasza domene, a gdy nie odpowiada —
   // adres hostingu; to ten sam panel. Gdy nie odpowie zaden albo liczba jest
-  // zerowa, kafelek po prostu sie nie pokazuje.
+  // zerowa, sekcja po prostu sie nie pokazuje.
   (async function () {
     const adresy = ['https://app.processminer.pl', 'https://processminerdashboard-production.up.railway.app'];
     for (const adres of adresy) {
@@ -1147,8 +1223,7 @@
         const d = await r.json();
         const godziny = Number(d.repetitiveHours || 0);
         if (!(godziny > 0)) return;
-        document.getElementById('live-hours').textContent = godziny.toLocaleString('pl-PL');
-        document.getElementById('stat-live').style.display = '';
+        pokazLicznik(godziny, d.updatedAt);
         return;
       } catch (e) { /* nastepny adres */ }
     }
