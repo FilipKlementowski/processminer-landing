@@ -448,8 +448,23 @@
     }
     .count-inner { position: relative; max-width: 900px; margin: 0 auto; padding: 0 28px; text-align: center; }
     .count-eyebrow {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: #60a5fa; margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 11px;
+      font-size: 1rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #60a5fa; margin-bottom: 26px;
+    }
+    /* Kropka ma mowic "to liczy sie teraz", wiec pulsuje razem z poswiata
+       wokol siebie, a nie tylko gasnie. */
+    .count-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #10b981;
+      flex-shrink: 0; animation: tetno 1.8s ease-in-out infinite;
+    }
+    @keyframes tetno {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+      50%      { opacity: .45; box-shadow: 0 0 0 7px rgba(16,185,129,0); }
+    }
+    /* Kto prosil system o mniej ruchu, dostaje spokojna kropke. */
+    @media (prefers-reduced-motion: reduce) {
+      .count-dot { animation: none; }
     }
     .count-n {
       font-family: 'Inter', system-ui, sans-serif;
@@ -801,8 +816,8 @@
      Pusta sekcja albo "0 h" na stronie glownej wygladalaby gorzej niz jej brak. -->
 <div class="count-sec" id="count-sec" style="display:none">
   <div class="count-inner">
-    <div class="count-eyebrow pl">Licznik</div>
-    <div class="count-eyebrow en">Live counter</div>
+    <div class="count-eyebrow pl"><span class="count-dot"></span>Licznik na żywo</div>
+    <div class="count-eyebrow en"><span class="count-dot"></span>Live counter</div>
     <div class="count-n"><span id="count-n">0</span><span class="unit">h</span></div>
     <p class="count-l pl">powtarzalnej pracy wykrytej u wszystkich użytkowników,<br><strong>łącznie od początku</strong></p>
     <p class="count-l en">of repetitive work detected across every user,<br><strong>total to date</strong></p>
