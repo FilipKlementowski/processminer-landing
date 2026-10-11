@@ -859,7 +859,8 @@
           <div class="step-title en">Observation</div>
           <p class="step-desc pl">Przez 10 dni roboczych AI zbiera wzorce pracy. Zero zrzutów ekranu, zero logowania klawiszy.</p>
           <p class="step-desc en">Over 10 working days AI collects work patterns. Zero screenshots, zero keystroke logging.</p>
-          <span class="step-tag">10 dni obserwacji</span>
+          <span class="step-tag pl">10 dni obserwacji</span>
+          <span class="step-tag en">10 days of observation</span>
         </div>
 
         <div class="step rev rev-d3">
@@ -869,7 +870,8 @@
           <div class="step-title en">Results</div>
           <p class="step-desc pl">Dostajesz backlog ułożony według priorytetów, z szacowanym zwrotem i szkicem automatyzacji dla każdej pozycji.</p>
           <p class="step-desc en">You get a backlog ordered by priority, with an estimated return and an automation outline for every item.</p>
-          <span class="step-tag">gotowy backlog</span>
+          <span class="step-tag pl">gotowy backlog</span>
+          <span class="step-tag en">ready backlog</span>
         </div>
       </div>
     </div>
@@ -1089,18 +1091,18 @@
           <span class="pl">Imię i nazwisko</span>
           <span class="en">Full name</span>
         </label>
-        <input type="text" class="form-input" placeholder="Jan Kowalski" required>
+        <input type="text" class="form-input" placeholder="Jan Kowalski" data-ph-pl="Jan Kowalski" data-ph-en="John Smith" required>
       </div>
       <div class="form-group">
         <label class="form-label">
           <span class="pl">Firma</span>
           <span class="en">Company</span>
         </label>
-        <input type="text" class="form-input" placeholder="Acme Sp. z o.o." required>
+        <input type="text" class="form-input" placeholder="Acme Sp. z o.o." data-ph-pl="Acme Sp. z o.o." data-ph-en="Acme Inc." required>
       </div>
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" class="form-input" placeholder="jan@firma.pl" required>
+        <input type="email" class="form-input" placeholder="jan@firma.pl" data-ph-pl="jan@firma.pl" data-ph-en="john@company.com" required>
       </div>
       <div class="form-group" style="margin-bottom:28px;">
         <label class="form-label">
@@ -1180,11 +1182,18 @@
     // Zapamietane, zeby polityka prywatnosci otwierala sie w tym samym jezyku,
     // ktory ktos wybral tutaj.
     try { localStorage.setItem('pm_lang', lang); } catch (e) {}
+    // Podpowiedzi w polach formularza to tez tekst, ktory ktos czyta, wiec ida
+    // za jezykiem strony. Przykladowe dane musza pasowac do czytelnika.
+    for (const pole of document.querySelectorAll('[data-ph-pl]')) {
+      pole.placeholder = isEn ? pole.dataset.phEn : pole.dataset.phPl;
+    }
   }
   (function () {
     let wybrany = null;
     try { wybrany = localStorage.getItem('pm_lang'); } catch (e) {}
-    if (wybrany === 'pl') setLang('pl');
+    // Strona startuje po angielsku, ale i tak wolamy setLang, zeby podpowiedzi
+    // w formularzu zostaly przestawione na angielskie.
+    setLang(wybrany === 'pl' ? 'pl' : 'en');
   })();
 
   // Liczba dobiega do swojej wartosci dopiero, gdy sekcja wejdzie w pole
