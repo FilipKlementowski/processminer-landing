@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProcessMiner — start here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Inter:wght@800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#0b1120; --mgla:#f6f7f9; --blekit:#2563eb; --ziel:#059669;
+    --szary:#8a93a3;
+  }
+  html,body{height:100%}
+  body{
+    font-family:'Instrument Sans',system-ui,sans-serif;
+    background:var(--ink); color:#fff; overflow:hidden;
+  }
+
+  /* Dwie polowy ekranu to dwie drogi. Kursor przechyla podzial w strone,
+     na ktora ktos patrzy, wiec wybor czuc, zanim sie go kliknie. */
+  .drzwi{display:flex;height:100vh;width:100%}
+  .skrzydlo{
+    position:relative; flex:1 1 50%; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:clamp(28px,4vw,64px);
+    text-decoration:none; color:inherit;
+    transition:flex-basis .55s cubic-bezier(.2,.8,.2,1), background-color .4s;
+  }
+  .drzwi:hover .skrzydlo{flex-basis:42%}
+  .drzwi .skrzydlo:hover{flex-basis:58%}
+
+  .lewe{background:var(--mgla); color:var(--ink)}
+  .prawe{background:var(--ink); color:#fff}
+  .lewe::after,.prawe::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    opacity:.5; transition:opacity .4s;
+  }
+  .lewe::after{background:radial-gradient(70% 60% at 20% 0%,rgba(37,99,235,.14),transparent 70%)}
+  .prawe::after{background:radial-gradient(70% 60% at 80% 0%,rgba(5,150,105,.20),transparent 70%)}
+  .skrzydlo:hover::after{opacity:1}
+
+  /* Jeden znak na cala strone. Siedzi nad jasna polowa i stoi w miejscu,
+     kiedy podzial przesuwa sie pod kursorem — to jedyny punkt wspolny obu drog. */
+  .znak{
+    position:fixed; z-index:4;
+    top:clamp(24px,3.4vw,44px); left:clamp(28px,4vw,64px);
+    display:inline-flex; align-items:center; gap:0;
+    font-family:'Inter',system-ui,sans-serif; font-weight:800;
+    letter-spacing:-.04em; font-size:1.25rem; color:var(--ink);
+    text-decoration:none;
+  }
+  .znak span{color:var(--blekit)}
+  .znak .symbol{width:26px;height:26px;border-radius:7px;display:block;flex-shrink:0;margin-right:9px}
+
+  .etykieta{
+    font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--szary); margin-bottom:18px;
+  }
+  .prawe .etykieta{color:#6b7689}
+
+  h2{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:800; letter-spacing:-.045em; line-height:.92;
+    font-size:clamp(2.4rem,5.4vw,5rem); text-wrap:balance;
+    margin-bottom:16px;
+  }
+  .lewe h2 em{font-style:normal;color:var(--blekit)}
+  .prawe h2 em{font-style:normal;color:#34d399}
+
+  p{max-width:34ch;font-size:clamp(.95rem,1.1vw,1.0625rem);line-height:1.5;color:#55607a}
+  .prawe p{color:#9aa4b8}
+
+  .strzalka{
+    margin-top:26px; display:inline-flex; align-items:center; gap:12px;
+    font-weight:600; font-size:1rem;
+  }
+  .strzalka span{
+    width:42px;height:42px;border-radius:50%;
+    display:grid;place-items:center;
+    border:1.5px solid currentColor; transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes trac{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+  @keyframes spada{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  .lewe .strzalka span{animation:trac 2.2s cubic-bezier(.45,0,.55,1) infinite}
+  .prawe .strzalka span{animation:spada 2.2s cubic-bezier(.45,0,.55,1) infinite .4s}
+  /* Pod kursorem ruch ustaje, a kolko odsuwa sie zdecydowanie — inaczej
+     animacja i najechanie walczylyby o te sama wlasciwosc. */
+  .lewe:hover .strzalka span{animation:none;transform:translateX(10px)}
+  .prawe:hover .strzalka span{animation:none;transform:translateY(8px)}
+
+  .meta{
+    margin-top:22px; font-size:.78rem; letter-spacing:.02em;
+    color:var(--szary); display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .prawe .meta{color:#67718a}
+  .meta b{font-weight:600}
+  .lewe .meta b{color:#334155}
+  .prawe .meta b{color:#cbd5e1}
+
+  .kreska{position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(148,163,184,.25);z-index:3;pointer-events:none}
+
+  /* Wejscie: skrzydla rozsuwaja sie raz, przy otwarciu. */
+  @keyframes wjazd{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .anim{animation:wjazd .7s cubic-bezier(.2,.8,.2,1) both}
+  .lewe .anim{animation-delay:.08s}
+  .prawe .anim{animation-delay:.2s}
+
+  @media (max-width:860px){
+    body{overflow:auto}
+    .drzwi{flex-direction:column;height:auto}
+    .skrzydlo{min-height:62vh;flex-basis:auto!important}
+    .kreska{display:none}
+    .znak{position:absolute}
+  }
+  @media (prefers-reduced-motion:reduce){.anim,.strzalka span{animation:none}.skrzydlo{transition:none}}
+</style>
+</head>
+<body>
+
+<a class="znak" href="https://processminer.pl">
+  <svg class="symbol" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="pmLogo" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6C63FF"/><stop offset="1" stop-color="#00D4FF"/></linearGradient></defs>
+    <rect width="512" height="512" rx="128" fill="#12121A"/>
+    <rect x="6" y="6" width="500" height="500" rx="122" fill="none" stroke="#6C63FF" stroke-opacity=".55" stroke-width="8"/>
+    <rect x="117" y="299" width="70" height="107" rx="34" fill="#6C63FF"/>
+    <rect x="221" y="224" width="70" height="181" rx="34" fill="url(#pmLogo)"/>
+    <rect x="324" y="139" width="70" height="267" rx="34" fill="#00D4FF"/>
+  </svg>
+  Process<span>Miner</span>
+</a>
+
+<div class="drzwi">
+  <a class="skrzydlo lewe" href="https://app.processminer.pl">
+    <div class="anim">
+      <div class="etykieta">Dashboard</div>
+      <h2>See what<br><em>keeps repeating</em></h2>
+      <p>The repetitive work we found across your team, ranked by the time it takes.</p>
+      <div class="strzalka">Open the dashboard
+        <span aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="meta"><span>Sign in with <b>Google</b></span><span>In your browser</span></div>
+    </div>
+  </a>
+
+  <a class="skrzydlo prawe" id="pobierz" href="https://app.processminer.pl/installer/latest">
+    <div class="anim">
+      <div class="etykieta">Desktop app</div>
+      <h2>Start<br><em>collecting</em></h2>
+      <p>Install it once and work as usual. After ten days the list is waiting for you.</p>
+      <div class="strzalka">Download for Windows
+        <span aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v8m0 0 4-4m-4 4L4 7M3 13h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="meta"><span>Version <b id="wersja">—</b></span><span><b>Windows 10/11</b></span><span>approx. <b>77 MB</b></span></div>
+    </div>
+  </a>
+  <div class="kreska"></div>
+</div>
+
+<script>
+  // Numer wersji i adres pliku bierzemy z panelu, zeby link nigdy nie wskazywal
+  // na wydanie, ktorego juz nie ma.
+  (async () => {
+    for (const baza of ['https://app.processminer.pl','https://processminerdashboard-production.up.railway.app']) {
+      try {
+        const r = await fetch(baza + '/api/version', { signal: AbortSignal.timeout(6000) })
+        if (!r.ok) continue
+        const v = await r.json()
+        if (!v.latest) return
+        document.getElementById('wersja').textContent = v.latest
+        document.getElementById('pobierz').href = baza + '/installer/ProcessMiner-Setup-' + v.latest + '.exe'
+        return
+      } catch (e) {}
+    }
+  })()
+</script>
+</body>
+</html>
