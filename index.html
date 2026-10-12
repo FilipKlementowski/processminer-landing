@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProcessMiner: Discover what is worth automating</title>
+  <title>ProcessMiner — process discovery for AI agencies</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='1' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%236C63FF'/%3E%3Cstop offset='1' stop-color='%2300D4FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='%2312121A'/%3E%3Crect x='6' y='6' width='500' height='500' rx='122' fill='none' stroke='%236C63FF' stroke-opacity='.55' stroke-width='8'/%3E%3Crect x='117' y='299' width='70' height='107' rx='34' fill='%236C63FF'/%3E%3Crect x='221' y='224' width='70' height='181' rx='34' fill='url(%23b)'/%3E%3Crect x='324' y='139' width='70' height='267' rx='34' fill='%2300D4FF'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='1' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%236C63FF'/%3E%3Cstop offset='1' stop-color='%2300D4FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='%2312121A'/%3E%3Crect x='6' y='6' width='500' height='500' rx='122' fill='none' stroke='%236C63FF' stroke-opacity='.55' stroke-width='8'/%3E%3Crect x='117' y='299' width='70' height='107' rx='34' fill='%236C63FF'/%3E%3Crect x='221' y='224' width='70' height='181' rx='34' fill='url(%23b)'/%3E%3Crect x='324' y='139' width='70' height='267' rx='34' fill='%2300D4FF'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -369,17 +369,17 @@
     .sec-sub { font-size: 1.0625rem; color: var(--ink-mid); line-height: 1.7; max-width: 500px; }
 
     /* ─── HOW IT WORKS ─── */
-    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 56px; position: relative; }
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 26px; margin-top: 56px; position: relative; }
     .steps::before {
       content:''; position: absolute;
-      top: 34px; left: calc(16.6% + 12px); right: calc(16.6% + 12px);
+      top: 34px; left: calc(12.5% + 12px); right: calc(12.5% + 12px);
       height: 1px;
       background: linear-gradient(90deg, rgba(59,130,246,0.4), rgba(59,130,246,0.1) 50%, rgba(59,130,246,0.4));
     }
     .step { position: relative; }
     .step-ghost {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 6rem; font-weight: 800;
+      font-size: 4.75rem; font-weight: 800;
       color: var(--blue); opacity: 0.07;
       position: absolute; top: -16px; right: 0;
       line-height: 1; pointer-events: none; user-select: none;
@@ -406,6 +406,32 @@
       border: 1px solid rgba(59,130,246,0.18);
       border-radius: 4px; padding: 3px 9px;
     }
+
+    /* ─── PANEL I APLIKACJA ─── */
+    .duo { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 56px; }
+    .duo-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 16px; padding: 34px 32px;
+    }
+    .duo-card.u-klienta { background: #f8fafc; }
+    .duo-tag {
+      display: inline-block; font-family: 'Fira Code', monospace;
+      font-size: 0.7rem; color: var(--blue); background: var(--blue-dim);
+      border: 1px solid rgba(59,130,246,0.18);
+      border-radius: 4px; padding: 3px 9px; margin-bottom: 18px;
+    }
+    .duo-h {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1.375rem; font-weight: 700;
+      letter-spacing: -0.03em; color: var(--ink); margin-bottom: 8px;
+    }
+    .duo-lead { font-size: 0.9375rem; color: var(--ink-mid); line-height: 1.65; margin-bottom: 22px; }
+    .duo-list { list-style: none; display: grid; gap: 13px; }
+    .duo-list li {
+      display: grid; grid-template-columns: 17px 1fr; gap: 11px;
+      font-size: 0.9375rem; color: var(--ink-mid); line-height: 1.55;
+    }
+    .duo-list svg { margin-top: 4px; color: var(--blue); }
 
     /* ─── FEATURES ─── */
     .features { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 56px; }
@@ -558,6 +584,10 @@
     .rev-d4 { transition-delay:0.4s; }
 
     /* ─── RESPONSIVE ─── */
+    @media(max-width:1100px){
+      .steps { grid-template-columns: repeat(2,1fr); gap: 32px; }
+      .steps::before { display:none; }
+    }
     @media(max-width:900px){
       .hero { grid-template-columns:1fr; padding:60px 24px; gap:40px; }
       /* allow the grid columns to shrink so the product mockup can't force the
@@ -570,6 +600,7 @@
       .steps { grid-template-columns:1fr; }
       .steps::before { display:none; }
       .features { grid-template-columns:1fr; }
+      .duo { grid-template-columns:1fr; }
       .stats-grid { grid-template-columns:1fr; gap:36px; padding:0 24px; }
       .wrap { padding:0 24px; }
       .sec { padding:64px 0; }
@@ -608,6 +639,7 @@
       Process<span>Miner</span></a>
     <nav class="nav-links">
       <a href="#how" class="nav-link"><span class="pl">Jak działa</span><span class="en">How it works</span></a>
+      <a href="#panel" class="nav-link"><span class="pl">Panel i aplikacja</span><span class="en">Dashboard &amp; app</span></a>
       <a href="#features" class="nav-link"><span class="pl">Funkcje</span><span class="en">Features</span></a>
       <a href="#demo" class="nav-link">Demo</a>
 <a href="#faq" class="nav-link">FAQ</a>
@@ -631,20 +663,20 @@
   <div class="hero">
     <div>
       <div class="eyebrow">
-        <span class="pl">Analiza procesów i automatyzacja</span>
-        <span class="en">Process Intelligence &amp; Automation</span>
+        <span class="pl">Dla agencji AI i automatyzacji</span>
+        <span class="en">For AI &amp; automation agencies</span>
       </div>
       <h1 class="hero-h1 pl">
-        Odkryj, co warto<br><em>zautomatyzować</em><br>w Twojej firmie
+        Wiedz, co <em>zautomatyzować</em><br>u klienta, zanim<br>złożysz ofertę
       </h1>
       <h1 class="hero-h1 en">
-        Discover what's worth<br><em>automating</em><br>in your company
+        Know what to <em>automate</em><br>for your client,<br>before you quote
       </h1>
       <p class="hero-sub pl">
-        ProcessMiner patrzy, jak realnie pracuje Twój zespół, i podpowiada, co warto zautomatyzować najpierw. Na koniec dostajesz gotowy backlog z propozycjami wdrożeń i szacowanym zwrotem.
+Instalujesz ProcessMinera u klienta i przez 10 dni roboczych AI obserwuje, jak naprawdę pracuje jego zespół. Dostajesz backlog powtarzalnych procesów ułożony według priorytetu, z szacowanym zwrotem i szkicem wdrożenia. Materiał, z którego składasz ofertę, zamiast kolejnych warsztatów.
       </p>
       <p class="hero-sub en">
-        ProcessMiner watches how your team actually works and points to what's worth automating first. You end up with a ready backlog: implementation proposals and an estimated return on each.
+You install ProcessMiner at your client and for 10 working days the AI watches how their team really works. You get a backlog of repetitive processes ordered by priority, with an estimated return and an implementation outline for each. Material you can quote from, instead of another discovery workshop.
       </p>
       <div class="hero-cta">
         <a href="#demo" class="btn" style="font-size:1rem;padding:13px 28px;">
@@ -652,8 +684,8 @@
           <span class="en">Book a demo →</span>
         </a>
         <div class="hero-trust">
-          <span class="pl">10 dni obserwacji. Konkretny backlog.</span>
-          <span class="en">10 days monitoring. Concrete backlog.</span>
+          <span class="pl">Jeden panel, wielu klientów. 10 dni na komplet danych.</span>
+          <span class="en">One dashboard, many clients. 10 days to a full picture.</span>
         </div>
       </div>
     </div>
@@ -835,44 +867,101 @@
       <div class="rev">
         <div class="sec-eyebrow pl">Jak to działa</div>
         <div class="sec-eyebrow en">How it works</div>
-        <h2 class="sec-h2 pl">Trzy kroki od danych<br>do automatyzacji</h2>
-        <h2 class="sec-h2 en">Three steps from data<br>to automation</h2>
-        <p class="sec-sub pl">Bez konfiguracji, bez inżynierów danych. Instalujesz, czekasz 10 dni, dostajesz gotowy backlog.</p>
-        <p class="sec-sub en">No configuration, no data engineers. Install, wait 10 days, receive your ready backlog.</p>
+        <h2 class="sec-h2 pl">Cztery kroki od instalacji<br>u klienta do oferty</h2>
+        <h2 class="sec-h2 en">Four steps from install<br>at your client to a quote</h2>
+        <p class="sec-sub pl">Bez integracji i bez dostępu do systemów klienta. Wysyłasz link, czekasz 10 dni, masz o czym rozmawiać.</p>
+        <p class="sec-sub en">No integrations, no access to your client's systems. Send a link, wait 10 days, and you have something to talk about.</p>
       </div>
 
       <div class="steps">
         <div class="step rev rev-d1">
           <div class="step-ghost">01</div>
           <div class="step-num">01</div>
-          <div class="step-title pl">Instalacja</div>
-          <div class="step-title en">Installation</div>
-          <p class="step-desc pl">Aplikacja Windows instaluje się w kilka minut. Działa dyskretnie w tle bez wpływu na wydajność.</p>
-          <p class="step-desc en">Windows app installs in minutes. Runs discreetly in the background without affecting performance.</p>
-          <span class="step-tag">~5 min setup</span>
+          <div class="step-title pl">Dodajesz klienta</div>
+          <div class="step-title en">You add the client</div>
+          <p class="step-desc pl">Zakładasz dla niego firmę w panelu i dostajesz link do pobrania aplikacji dla jego pracowników.</p>
+          <p class="step-desc en">You create a company for them in the dashboard and get a download link for their employees.</p>
+          <span class="step-tag pl">1 klient = 1 firma</span>
+          <span class="step-tag en">1 client = 1 company</span>
         </div>
 
         <div class="step rev rev-d2">
           <div class="step-ghost">02</div>
           <div class="step-num">02</div>
-          <div class="step-title pl">Obserwacja</div>
-          <div class="step-title en">Observation</div>
-          <p class="step-desc pl">Przez 10 dni roboczych AI zbiera wzorce pracy. Zero zrzutów ekranu, zero logowania klawiszy.</p>
-          <p class="step-desc en">Over 10 working days AI collects work patterns. Zero screenshots, zero keystroke logging.</p>
-          <span class="step-tag pl">10 dni obserwacji</span>
-          <span class="step-tag en">10 days of observation</span>
+          <div class="step-title pl">Klient instaluje</div>
+          <div class="step-title en">The client installs</div>
+          <p class="step-desc pl">Instalka Windows schodzi w kilka minut. Nie potrzebuje integracji, API ani dostępu do systemów klienta.</p>
+          <p class="step-desc en">The Windows installer takes a few minutes. It needs no integration, no API and no access to their systems.</p>
+          <span class="step-tag">~5 min setup</span>
         </div>
 
         <div class="step rev rev-d3">
           <div class="step-ghost">03</div>
           <div class="step-num">03</div>
-          <div class="step-title pl">Wyniki</div>
-          <div class="step-title en">Results</div>
-          <p class="step-desc pl">Dostajesz backlog ułożony według priorytetów, z szacowanym zwrotem i szkicem automatyzacji dla każdej pozycji.</p>
-          <p class="step-desc en">You get a backlog ordered by priority, with an estimated return and an automation outline for every item.</p>
-          <span class="step-tag pl">gotowy backlog</span>
-          <span class="step-tag en">ready backlog</span>
+          <div class="step-title pl">Obserwacja</div>
+          <div class="step-title en">Observation</div>
+          <p class="step-desc pl">Przez 10 dni roboczych AI składa pojedyncze czynności w procesy. Zero zrzutów ekranu, zero zapisanych znaków.</p>
+          <p class="step-desc en">Over 10 working days the AI groups single actions into processes. Zero screenshots, zero keystroke logging.</p>
+          <span class="step-tag pl">10 dni obserwacji</span>
+          <span class="step-tag en">10 days of observation</span>
         </div>
+
+        <div class="step rev rev-d3">
+          <div class="step-ghost">04</div>
+          <div class="step-num">04</div>
+          <div class="step-title pl">Backlog z ROI</div>
+          <div class="step-title en">Backlog with ROI</div>
+          <p class="step-desc pl">W panelu masz procesy ułożone według priorytetu, z szacowanym zwrotem i szkicem wdrożenia dla każdego.</p>
+          <p class="step-desc en">The dashboard shows the processes ordered by priority, with an estimated return and an implementation outline for each.</p>
+          <span class="step-tag pl">gotowy pod ofertę</span>
+          <span class="step-tag en">ready to quote</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PANEL I APLIKACJA ─── -->
+<div id="panel" class="wrap">
+  <div class="sec">
+    <div class="rev">
+      <div class="sec-eyebrow pl">Dwie strony</div>
+      <div class="sec-eyebrow en">Two sides</div>
+      <h2 class="sec-h2 pl">Panel zostaje u Ciebie,<br><span style="color:var(--blue)">aplikacja idzie do klienta</span></h2>
+      <h2 class="sec-h2 en">The dashboard stays with you,<br><span style="color:var(--blue)">the app goes to your client</span></h2>
+      <p class="sec-sub pl">To są dwa osobne kawałki. Klient widzi tylko aplikację na swoich komputerach. Cała analiza, wszyscy Twoi klienci i cały backlog są po Twojej stronie.</p>
+      <p class="sec-sub en">These are two separate pieces. Your client only ever sees the app on their computers. The analysis, all your clients and the whole backlog sit on your side.</p>
+    </div>
+
+    <div class="duo">
+      <div class="duo-card rev rev-d1">
+        <span class="duo-tag pl">zostaje u Ciebie</span>
+        <span class="duo-tag en">stays with you</span>
+        <div class="duo-h pl">Panel</div>
+        <div class="duo-h en">Dashboard</div>
+        <p class="duo-lead pl">Otwierasz w przeglądarce. Jedno miejsce na wszystkich klientów agencji.</p>
+        <p class="duo-lead en">You open it in a browser. One place for every client of the agency.</p>
+        <ul class="duo-list">
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Każdy klient jako osobna firma, z własną listą ludzi i własnym backlogiem</span><span class="en">Each client as a separate company, with its own people and its own backlog</span></li>
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Propozycje ułożone według priorytetu, z szacowanym zwrotem i szkicem wdrożenia</span><span class="en">Proposals ordered by priority, with an estimated return and an implementation outline</span></li>
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Dostęp dla ludzi z Twojego zespołu, nadawany rolami</span><span class="en">Access for people on your team, granted by role</span></li>
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Jeden link do pobrania aplikacji, który wysyłasz klientowi</span><span class="en">One app download link that you send to the client</span></li>
+        </ul>
+      </div>
+
+      <div class="duo-card u-klienta rev rev-d2">
+        <span class="duo-tag pl">idzie do klienta</span>
+        <span class="duo-tag en">goes to your client</span>
+        <div class="duo-h pl">Aplikacja</div>
+        <div class="duo-h en">Desktop app</div>
+        <p class="duo-lead pl">Wysyłasz link, pracownicy klienta instalują ją u siebie.</p>
+        <p class="duo-lead en">You send a link and your client's employees install it themselves.</p>
+        <ul class="duo-list">
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Instalka Windows, około pięciu minut, bez integracji i bez API</span><span class="en">Windows installer, about five minutes, no integrations and no API</span></li>
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Widoczna na komputerze, pracownik wie, że działa</span><span class="en">Visible on the computer, the employee knows it is running</span></li>
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Pracownik ogląda swój raport i może wstrzymać zbieranie w każdej chwili</span><span class="en">The employee sees their own report and can pause collection at any time</span></li>
+        <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Żadnych zrzutów ekranu i żadnych zapisanych znaków</span><span class="en">No screenshots and no stored keystrokes</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -884,41 +973,41 @@
     <div class="rev">
       <div class="sec-eyebrow pl">Możliwości</div>
       <div class="sec-eyebrow en">Features</div>
-      <h2 class="sec-h2 pl">Zaprojektowany dla<br><span style="color:var(--blue)">realnych procesów</span> biznesowych</h2>
-      <h2 class="sec-h2 en">Built for<br><span style="color:var(--blue)">real business</span> processes</h2>
+      <h2 class="sec-h2 pl">Zbudowany pod to,<br>jak pracuje <span style="color:var(--blue)">agencja</span></h2>
+      <h2 class="sec-h2 en">Built around how<br>an <span style="color:var(--blue)">agency</span> works</h2>
     </div>
 
     <div class="features">
       <div class="feat rev rev-d1">
         <div class="feat-icon">📊</div>
-        <div class="feat-title pl">Monitoring aktywności</div>
-        <div class="feat-title en">Activity Monitoring</div>
-        <p class="feat-desc pl">Widzi, których aplikacji używa zespół i jak przełącza się między nimi. Pełny zapis zostaje na komputerze, a na panel trafia skrót: które aplikacje, jak często i jak długo.</p>
-        <p class="feat-desc en">Sees which apps your team uses and how they switch between them. The full log stays on the computer; what reaches the dashboard is the summary: which apps, how often and for how long.</p>
+        <div class="feat-title pl">Wielu klientów w jednym panelu</div>
+        <div class="feat-title en">Many clients, one dashboard</div>
+        <p class="feat-desc pl">Każdy klient to osobna firma, z własną listą ludzi i własnym backlogiem. Przełączasz się między nimi jednym kliknięciem, a dostęp dla swojego zespołu nadajesz rolami.</p>
+        <p class="feat-desc en">Each client is a separate company, with its own people and its own backlog. You switch between them in one click and grant your own team access by role.</p>
       </div>
 
       <div class="feat rev rev-d2">
         <div class="feat-icon">🔍</div>
         <div class="feat-title pl">Wykrywanie procesów</div>
         <div class="feat-title en">Process Discovery</div>
-        <p class="feat-desc pl">Z pojedynczych czynności AI składa całe procesy i pokazuje, gdzie praca się powtarza albo zacina.</p>
-        <p class="feat-desc en">AI groups individual actions into whole processes and shows where work repeats or gets stuck.</p>
+        <p class="feat-desc pl">Z pojedynczych czynności AI składa całe procesy i pokazuje, gdzie praca u klienta się powtarza albo zacina. Nazwy aplikacji i dokumentów są przy każdym kroku, więc wiesz, czego dotyczy.</p>
+        <p class="feat-desc en">The AI groups single actions into whole processes and shows where your client's work repeats or gets stuck. App and document names sit next to every step, so you know what it is about.</p>
       </div>
 
       <div class="feat rev rev-d3">
         <div class="feat-icon">⚡</div>
-        <div class="feat-title pl">Propozycje AI</div>
-        <div class="feat-title en">AI Proposals</div>
-        <p class="feat-desc pl">Układa backlog według priorytetów, z szacowanym zwrotem i wskazówką, jak każdą automatyzację wdrożyć.</p>
-        <p class="feat-desc en">Orders the backlog by priority, with an estimated return and a note on how to implement each automation.</p>
+        <div class="feat-title pl">Szacowany zwrot i priorytety</div>
+        <div class="feat-title en">Estimated return and priorities</div>
+        <p class="feat-desc pl">Przy każdym procesie widzisz, ile czasu realnie pochłania i co da jego automatyzacja. Backlog jest ułożony tak, że od góry bierzesz to, co najbardziej się opłaca.</p>
+        <p class="feat-desc en">Every process comes with the time it actually consumes and what automating it would return. The backlog is ordered so the work that pays off most sits on top.</p>
       </div>
 
       <div class="feat rev rev-d4">
         <div class="feat-icon">🔒</div>
-        <div class="feat-title pl">Prywatność danych</div>
-        <div class="feat-title en">Data Privacy</div>
-        <p class="feat-desc pl">Surowy zapis zostaje na komputerze pracownika. Hasła, numery kart i kody maskujemy automatycznie, a zbieranie można wstrzymać w każdej chwili.</p>
-        <p class="feat-desc en">The raw log stays on the employee's computer. Passwords, card numbers and codes are masked automatically, and anyone can pause collection at any time.</p>
+        <div class="feat-title pl">Prywatność, którą obronisz przed klientem</div>
+        <div class="feat-title en">Privacy you can defend to your client</div>
+        <p class="feat-desc pl">Surowy zapis zostaje na komputerze pracownika. Hasła, numery kart i kody maskujemy automatycznie, zrzutów ekranu nie ma w ogóle, a zbieranie można wstrzymać w każdej chwili.</p>
+        <p class="feat-desc en">The raw log stays on the employee's computer. Passwords, card numbers and codes are masked automatically, no screenshots are ever taken, and anyone can pause collection at any time.</p>
       </div>
     </div>
 
@@ -1044,6 +1133,11 @@
       <div class="stat-l pl">od instalacji do<br><strong>gotowego backlogu</strong></div>
       <div class="stat-l en">from install to<br><strong>ready backlog</strong></div>
     </div>
+    <div class="rev rev-d1">
+      <div class="stat-n"><span>1</span></div>
+      <div class="stat-l pl">panel na<br><strong>wszystkich klientów</strong></div>
+      <div class="stat-l en">dashboard for<br><strong>all your clients</strong></div>
+    </div>
     <div class="rev rev-d2">
       <div class="stat-n emerald"><span>0</span></div>
       <div class="stat-l pl">zrzutów ekranu<br><strong>i zapisanych znaków</strong></div>
@@ -1062,10 +1156,12 @@
         <h2 class="sec-h2 en">Frequently asked questions</h2>
       </div>
       <div style="max-width:680px;margin:40px auto 0;display:flex;flex-direction:column;gap:0;">
-        <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Czy pracownicy wiedzą, że są monitorowani?</span><span class="en">Do employees know they're being monitored?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Tak, aplikacja jest w pełni widoczna na komputerze pracownika. Pracownik widzi, co jest zbierane, może w każdej chwili wstrzymać monitoring i ma dostęp do swojego raportu, zanim udostępni go pracodawcy.</p><p class="en">Yes, the app is fully visible on the employee's computer. The employee can see what's being collected, pause monitoring at any time, and review their report before sharing it with the employer.</p></div></div>
-        <div class="faq-item rev rev-d1"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Czy dane trafiają do chmury?</span><span class="en">Does data go to the cloud?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Część tak, i tylko za zgodą. Pełny zapis pracy zostaje na komputerze i nigdy go nie opuszcza. Na panel trafia skrót: konto, oś czasu dnia z ostatnich 14 dni oraz wykryte powtarzalne czynności wraz z nazwami aplikacji i dokumentów. Nic nie wychodzi, dopóki pracownik nie zaakceptuje zasad przy pierwszym uruchomieniu.</p><p class="en">Some of it does, and only with consent. The full work log stays on the computer and never leaves it. What reaches the dashboard is a summary: the account, a timeline of the last 14 days, and the detected repeating activities with the app and document names. Nothing leaves before the employee accepts the terms on first run.</p></div></div>
-        <div class="faq-item rev rev-d2"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Jakie systemy i aplikacje są obsługiwane?</span><span class="en">Which systems and apps are supported?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">ProcessMiner działa z każdą aplikacją Windows: ERP, CRM, Office 365, systemy branżowe. Nie wymaga integracji API ani dostępu do danych systemów.</p><p class="en">ProcessMiner works with any Windows application: ERP, CRM, Office 365, industry-specific systems. No API integration or system data access required.</p></div></div>
-        <div class="faq-item rev rev-d3"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Jak długo trwa wdrożenie?</span><span class="en">How long does implementation take?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Instalacja zajmuje kilka minut. Po 10 dniach roboczych otrzymujesz gotowy raport z propozycjami automatyzacji. Wdrożenie pierwszej automatyzacji zwykle zajmuje 1–2 tygodnie.</p><p class="en">Installation takes a few minutes. After 10 working days you receive a ready report with automation proposals. Implementing the first automation typically takes 1–2 weeks.</p></div></div>
+        <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Czy mogę obsługiwać wielu klientów z jednego panelu?</span><span class="en">Can I run several clients from one dashboard?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Tak. Każdy klient to osobna firma w panelu, z własną listą pracowników i własnym backlogiem. Przełączasz się między nimi jednym kliknięciem, a dostęp dla swojego zespołu nadajesz rolami.</p><p class="en">Yes. Each client is a separate company in the dashboard, with its own people and its own backlog. You switch between them in one click and grant your own team access by role.</p></div></div>
+        <div class="faq-item rev rev-d1"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Co dokładnie dostaję po 10 dniach?</span><span class="en">What exactly do I get after 10 days?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Listę powtarzalnych procesów u klienta, ułożoną według priorytetu. Przy każdym: ile czasu pochłania, co da jego automatyzacja, w jakich aplikacjach się dzieje i szkic wdrożenia. To jest materiał, z którego składasz ofertę.</p><p class="en">A list of your client’s repetitive processes, ordered by priority. For each one: the time it consumes, what automating it would return, which apps it runs through, and an implementation outline. That is the material you build your quote from.</p></div></div>
+        <div class="faq-item rev rev-d2"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Czy klient wie, że jest monitorowany?</span><span class="en">Does the client know they are being monitored?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Tak, i jego pracownicy też. Aplikacja jest widoczna na komputerze, pracownik widzi, co jest zbierane, może wstrzymać zbieranie i obejrzeć swój raport, zanim cokolwiek wyjdzie. Bez zgody przy pierwszym uruchomieniu nic się nie zaczyna.</p><p class="en">Yes, and so do their employees. The app is visible on the computer, the employee can see what is being collected, pause it, and review their own report before anything leaves. Nothing starts until they accept the terms on first run.</p></div></div>
+        <div class="faq-item rev rev-d3"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Czy mogę to sprzedawać pod swoją marką?</span><span class="en">Can I sell this under my own brand?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Nie w pełni. Instancję hostujesz u siebie i dostajesz własny klucz AI, więc dane Twoich klientów nie mieszają się z cudzymi. Marka ProcessMiner zostaje jednak widoczna w aplikacji i w panelu, a pełny white-label nie jest dziś dostępny.</p><p class="en">Not fully. You host the instance yourself and get your own AI key, so your clients’ data never mixes with anyone else’s. The ProcessMiner brand does stay visible in the app and the dashboard, though, and a full white-label is not available today.</p></div></div>
+        <div class="faq-item rev"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Ile danych wychodzi z komputera klienta?</span><span class="en">How much data leaves the client’s computer?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Pełny zapis pracy zostaje na komputerze i nigdy go nie opuszcza. Do panelu idzie skrót: konto, oś czasu ostatnich 14 dni oraz wykryte powtarzalne czynności z nazwami aplikacji i dokumentów. Zrzutów ekranu nie ma w ogóle.</p><p class="en">The full work log stays on the computer and never leaves it. What goes to the dashboard is a summary: the account, a timeline of the last 14 days, and the detected repeating activities with app and document names. No screenshots are taken at all.</p></div></div>
+        <div class="faq-item rev rev-d1"><button class="faq-q" onclick="toggleFaq(this)"><span class="pl">Czy zadziała u klienta na jego systemach?</span><span class="en">Will it work with my client’s systems?</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p class="pl">Tak. ProcessMiner czyta aktywność w każdej aplikacji Windows: ERP, CRM, Office 365, systemy branżowe. Nie potrzebuje integracji, API ani dostępu do danych w tych systemach, więc dział IT klienta nie musi niczego otwierać.</p><p class="en">Yes. ProcessMiner reads activity in any Windows application: ERP, CRM, Office 365, industry-specific systems. It needs no integration, no API and no access to the data inside them, so your client’s IT team does not have to open anything up.</p></div></div>
       </div>
     </div>
   </div>
@@ -1079,10 +1175,10 @@
         <span class="pl">Umów demo</span>
         <span class="en">Book a demo</span>
       </div>
-      <h2 class="sec-h2 pl" style="text-align:center;">Sprawdź, co możesz<br><span style="color:var(--blue)">zautomatyzować</span></h2>
-      <h2 class="sec-h2 en" style="text-align:center;">See what you can<br><span style="color:var(--blue)">automate</span></h2>
-      <p class="sec-sub pl" style="margin:14px auto 0;text-align:center;">Bezpłatna rozmowa 30 min. Pokażemy ProcessMinera w akcji na realnych przykładach z Twojej branży.</p>
-      <p class="sec-sub en" style="margin:14px auto 0;text-align:center;">Free 30-min call. We'll show ProcessMiner in action with real-world examples from your industry.</p>
+      <h2 class="sec-h2 pl" style="text-align:center;">Zobacz, co ProcessMiner<br><span style="color:var(--blue)">znajdzie u Twojego klienta</span></h2>
+      <h2 class="sec-h2 en" style="text-align:center;">See what ProcessMiner<br><span style="color:var(--blue)">finds at your client</span></h2>
+      <p class="sec-sub pl" style="margin:14px auto 0;text-align:center;">Bezpłatna rozmowa 30 min. Pokażemy panel i aplikację na prawdziwym wdrożeniu u klienta agencji.</p>
+      <p class="sec-sub en" style="margin:14px auto 0;text-align:center;">Free 30-min call. We'll show the dashboard and the app on a real agency deployment.</p>
     </div>
 
     <form id="demo-form" class="rev" onsubmit="submitForm(event)">
@@ -1095,10 +1191,10 @@
       </div>
       <div class="form-group">
         <label class="form-label">
-          <span class="pl">Firma</span>
-          <span class="en">Company</span>
+          <span class="pl">Nazwa agencji</span>
+          <span class="en">Agency name</span>
         </label>
-        <input type="text" class="form-input" placeholder="Acme Sp. z o.o." data-ph-pl="Acme Sp. z o.o." data-ph-en="Acme Inc." required>
+        <input type="text" class="form-input" placeholder="Acme Automatyzacje" data-ph-pl="Acme Automatyzacje" data-ph-en="Acme Automation" required>
       </div>
       <div class="form-group">
         <label class="form-label">Email</label>
