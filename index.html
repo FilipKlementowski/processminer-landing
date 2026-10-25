@@ -330,7 +330,6 @@
       background: #0f172a; border: 1px solid #1e293b;
       border-radius: 4px; padding: 1px 5px; color: #94a3b8;
     }
-    .app-prop-apps .arrow { color: #475569; }
     .app-prop-meta { display: flex; gap: 12px; }
     .app-prop-metric { font-size: 0.68rem; }
     .app-prop-metric .val { color: #3b82f6; font-weight: 700; }
@@ -615,6 +614,55 @@
     .rev-d3 { transition-delay:0.3s; }
     .rev-d4 { transition-delay:0.4s; }
 
+    /* ─── DLACZEGO WYWIAD NIE WYSTARCZA ─── */
+    .miss-grid { display:grid; grid-template-columns:0.95fr 1.05fr; gap:52px; align-items:start; margin-top:52px; }
+    .gap-card { background:var(--white); border:1px solid var(--border); border-radius:18px; padding:26px 30px; }
+    .gap-row { display:flex; align-items:baseline; justify-content:space-between; gap:20px; padding:18px 0; }
+    .gap-row + .gap-row { border-top:1px solid var(--border); }
+    .gap-k { font-size:0.9375rem; color:var(--ink-mid); }
+    .gap-v {
+      font-family:'Fira Code', monospace; font-size:1.375rem; font-weight:600;
+      color:var(--ink-light); font-variant-numeric:tabular-nums; white-space:nowrap;
+    }
+    .gap-v.hi { color:var(--blue); font-size:1.875rem; }
+    .gap-note {
+      font-size:0.78rem; color:var(--ink-light); line-height:1.65;
+      margin-top:18px; padding-top:16px; border-top:1px solid var(--border);
+    }
+    .miss-list { list-style:none; display:flex; flex-direction:column; gap:26px; }
+    .miss-t { font-size:1.0625rem; font-weight:700; letter-spacing:-0.02em; color:var(--ink); margin-bottom:6px; }
+    .miss-d { font-size:0.9375rem; color:var(--ink-mid); line-height:1.68; }
+
+    /* ─── PRYWATNOSC WYSOKO NA STRONIE ───
+       Agencja nie wdrozy u klienta czegos, czego nie umie obronic na spotkaniu.
+       Dlatego te cztery zdania stoja nad falda, a nie w stopce. */
+    .priv-band { background:var(--ink); padding:76px 0; }
+    .priv-head { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end; }
+    .priv-eyebrow {
+      font-family:'Fira Code', monospace; font-size:0.72rem; color:var(--blue);
+      letter-spacing:0.12em; text-transform:uppercase;
+      display:flex; align-items:center; gap:10px; margin-bottom:16px;
+    }
+    .priv-eyebrow::before { content:''; width:28px; height:1px; background:var(--blue); }
+    .priv-h2 {
+      font-size:clamp(1.75rem, 2.8vw, 2.375rem); font-weight:800;
+      letter-spacing:-0.04em; line-height:1.12; color:var(--white); text-wrap:balance;
+    }
+    .priv-lead { font-size:1rem; color:#94a3b8; line-height:1.7; }
+    .priv-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:30px;
+      margin-top:52px; padding-top:44px; border-top:1px solid #1e293b;
+    }
+    .priv-no {
+      font-family:'Fira Code', monospace; font-size:0.7rem; letter-spacing:0.14em;
+      text-transform:uppercase; color:#475569; margin-bottom:10px;
+    }
+    .priv-t { font-size:1rem; font-weight:700; color:var(--white); letter-spacing:-0.015em; line-height:1.35; margin-bottom:8px; }
+    .priv-d { font-size:0.875rem; color:#94a3b8; line-height:1.65; }
+    .priv-foot { margin-top:40px; font-size:0.875rem; color:#64748b; }
+    .priv-foot a { color:var(--blue); text-decoration:none; }
+    .priv-foot a:hover { text-decoration:underline; }
+
     /* ─── RESPONSIVE ─── */
     @media(max-width:1100px){
       .steps { grid-template-columns: repeat(2,1fr); gap: 32px; }
@@ -632,6 +680,9 @@
       .steps { grid-template-columns:1fr; }
       .steps::before { display:none; }
       .features { grid-template-columns:1fr; }
+      .miss-grid { grid-template-columns:1fr; gap:36px; }
+      .priv-head { grid-template-columns:1fr; gap:20px; align-items:start; }
+      .priv-grid { grid-template-columns:repeat(2,1fr); gap:28px; }
       .duo { grid-template-columns:1fr; }
       .panel-sec .sec { padding:72px 0; }
       .stats-grid { grid-template-columns:1fr; gap:36px; padding:0 24px; }
@@ -645,6 +696,8 @@
     @media(max-width:600px){
       .hero-h1 { font-size:2.25rem; }
       .hero { padding:50px 20px; }
+      .priv-grid { grid-template-columns:1fr; gap:26px; }
+      .priv-band { padding:60px 0; }
       /* keep the top bar clean on phones: logo + language only (the hero has its own CTA) */
       .nav-right .btn { display:none; }
       .nav-inner { padding:0 16px; }
@@ -700,16 +753,16 @@
         <span class="en">For AI &amp; automation agencies</span>
       </div>
       <h1 class="hero-h1 pl">
-        Wiedz, co <em>zautomatyzować</em><br>u klienta, zanim<br>złożysz ofertę
+        Znajdź procesy,<br>o których klient<br><em>zapomniał powiedzieć</em>
       </h1>
       <h1 class="hero-h1 en">
-        Know what to <em>automate</em><br>for your client,<br>before you quote
+        Find the workflows<br>your clients<br><em>forget to mention</em>
       </h1>
       <p class="hero-sub pl">
-Instalujesz ProcessMinera u klienta i przez 10 dni roboczych AI obserwuje, jak naprawdę pracuje jego zespół. Dostajesz backlog powtarzalnych procesów ułożony według priorytetu, z szacowanym zwrotem i szkicem wdrożenia. Materiał, z którego składasz ofertę, zamiast kolejnych warsztatów.
+Zanim złożysz ofertę, zobacz dane: które czynności wracają co tydzień, ile razy, w jakich programach i ile czasu zjadają. Dziesięć dni roboczych u klienta zamiast kolejnego warsztatu — i backlog procesów z szacowanym zwrotem, z którego składasz wycenę.
       </p>
       <p class="hero-sub en">
-You install ProcessMiner at your client and for 10 working days the AI watches how their team really works. You get a backlog of repetitive processes ordered by priority, with an estimated return and an implementation outline for each. Material you can quote from, instead of another discovery workshop.
+Before you quote, look at the data: which activities come back every week, how often, in which programs, and how much time they take. Ten working days at your client instead of another workshop — and a backlog of processes, with an estimated return, that you can quote from.
       </p>
       <div class="hero-cta">
         <a href="#demo" class="btn" style="font-size:1rem;padding:13px 28px;">
@@ -863,7 +916,8 @@ You install ProcessMiner at your client and for 10 working days the AI watches h
             </div>
             <div class="app-prop-title"><span class="pl">Automatyczne generowanie raportów sprzedaży</span><span class="en">Sales reports generated automatically</span></div>
             <div class="app-prop-apps">
-              <span>Excel</span><span class="arrow">→</span><span>SAP</span><span class="arrow">→</span><span>Outlook</span>
+              <span class="pl">27 wystąpień</span><span class="en">27 occurrences</span>
+              <span class="pl">6 dni</span><span class="en">6 days</span>
             </div>
             <div class="app-prop-meta">
               <div class="app-prop-metric"><span class="val">2.4h</span> <span class="lbl"><span class="pl">/tydzień</span><span class="en">/week</span></span></div>
@@ -873,6 +927,124 @@ You install ProcessMiner at your client and for 10 working days the AI watches h
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ─── DLACZEGO WYWIAD NIE WYSTARCZA ─── -->
+<div id="wywiad" class="sec-bg">
+  <div class="wrap">
+    <div class="sec">
+      <div class="rev">
+        <div class="sec-eyebrow">
+          <span class="pl">Dlaczego wywiad nie wystarcza</span>
+          <span class="en">Why interviews miss things</span>
+        </div>
+        <h2 class="sec-h2 pl">Pytasz, ile to trwa.<br>Dostajesz liczbę, <em>nie pomiar</em>.</h2>
+        <h2 class="sec-h2 en">You ask how long it takes.<br>You get a number, <em>not a measurement</em>.</h2>
+        <p class="sec-sub pl">Nikt nie kłamie. Po prostu nikt nie liczy własnej pracy w minutach — a te cztery rzeczy wypadają z relacji zawsze.</p>
+        <p class="sec-sub en">Nobody is lying. People simply do not count their own work in minutes — and these four things fall out of every account of it.</p>
+      </div>
+
+      <div class="miss-grid">
+        <div class="gap-card rev rev-d1">
+          <div class="gap-row">
+            <span class="gap-k pl">Tak, jak opowiada zespół</span>
+            <span class="gap-k en">As the team describes it</span>
+            <span class="gap-v">20–30 min</span>
+          </div>
+          <div class="gap-row">
+            <span class="gap-k pl">Tak, jak wyszło z pomiaru</span>
+            <span class="gap-k en">As the measurement came out</span>
+            <span class="gap-v hi">108 min</span>
+          </div>
+          <p class="gap-note pl">Przykładowy rozstrzał, nie dane konkretnego klienta. Twoje liczby wychodzą z dziesięciu dni pomiaru u niego — i to jest dokładnie ta różnica, za którą płaci.</p>
+          <p class="gap-note en">An illustrative gap, not one client's data. Your numbers come out of ten days of measurement at theirs — and that difference is exactly what they are paying for.</p>
+        </div>
+
+        <ul class="miss-list rev rev-d2">
+          <li>
+            <div class="miss-t pl">Opowiada czynność, nie czekanie</div>
+            <div class="miss-t en">They describe the doing, not the waiting</div>
+            <p class="miss-d pl">Powie, co klika. Nie policzy minut, w których czekał na eksport, na wczytanie albo na czyjąś odpowiedź. A to często większa połowa.</p>
+            <p class="miss-d en">They will tell you what they click. They will not count the minutes spent waiting for an export, for a file to load, or for somebody to reply. That is often the bigger half.</p>
+          </li>
+          <li>
+            <div class="miss-t pl">Nikt nie pamięta powrotów</div>
+            <div class="miss-t en">Nobody remembers going back</div>
+            <p class="miss-d pl">Do tego samego okna wraca się w jednym zadaniu kilkanaście razy. W opowieści to jest jeden krok.</p>
+            <p class="miss-d en">The same window gets opened a dozen times inside one task. In the telling, it is a single step.</p>
+          </li>
+          <li>
+            <div class="miss-t pl">Przerwanie nie czuje się jak etap pracy</div>
+            <div class="miss-t en">An interruption does not feel like part of the job</div>
+            <p class="miss-d pl">„Zapytam Kamilę" nikomu nie wygląda na część procesu. W danych to zwykle jest wąskie gardło.</p>
+            <p class="miss-d en">"I'll ask Kamila" looks to nobody like a stage of the process. In the data it is usually the bottleneck.</p>
+          </li>
+          <li>
+            <div class="miss-t pl">Podaje czas, kiedy idzie dobrze</div>
+            <div class="miss-t en">They quote the time when it goes well</div>
+            <p class="miss-d pl">Nie średnią z dwudziestu przebiegów, tylko ten jeden, który pamięta. Zwykle najgładszy.</p>
+            <p class="miss-d en">Not the average of twenty runs — the one they remember. Usually the smoothest one.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PRYWATNOSC, ZANIM KTOKOLWIEK ZAPYTA ─── -->
+<div id="prywatnosc-pas" class="priv-band">
+  <div class="wrap">
+    <div class="priv-head rev">
+      <div>
+        <div class="priv-eyebrow">
+          <span class="pl">Zanim klient zapyta</span>
+          <span class="en">Before your client asks</span>
+        </div>
+        <h2 class="priv-h2 pl">To nie jest program do patrzenia ludziom na ręce</h2>
+        <h2 class="priv-h2 en">This is not a tool for watching people work</h2>
+      </div>
+      <div>
+        <p class="priv-lead pl">Mierzy przepływ pracy, nie człowieka. Cztery zdania, które możesz powiedzieć klientowi wprost — i których nie będziesz musiał potem odwoływać.</p>
+        <p class="priv-lead en">It measures the flow of work, not the person. Four sentences you can say to your client outright — and will never have to walk back.</p>
+      </div>
+    </div>
+
+    <div class="priv-grid">
+      <div class="rev rev-d1">
+        <div class="priv-no"><span class="pl">Nie ma</span><span class="en">No</span></div>
+        <div class="priv-t pl">Nagrywania ekranu</div>
+        <div class="priv-t en">Screen recording</div>
+        <p class="priv-d pl">Takiej funkcji nie ma w ogóle. Nie da się jej włączyć ani kupić w wyższym pakiecie.</p>
+        <p class="priv-d en">The feature does not exist. It cannot be switched on, or bought in a higher plan.</p>
+      </div>
+      <div class="rev rev-d2">
+        <div class="priv-no"><span class="pl">Nie ma</span><span class="en">No</span></div>
+        <div class="priv-t pl">Zrzutów ekranu</div>
+        <div class="priv-t en">Screenshots</div>
+        <p class="priv-d pl">Kod, który je robił, został z aplikacji usunięty — a nie wyłączony w ustawieniach.</p>
+        <p class="priv-d en">The code that took them was removed from the app, not switched off in settings.</p>
+      </div>
+      <div class="rev rev-d3">
+        <div class="priv-no"><span class="pl">Nie ma</span><span class="en">No</span></div>
+        <div class="priv-t pl">Haseł ani treści pisania</div>
+        <div class="priv-t en">Passwords or typed text</div>
+        <p class="priv-d pl">Zapisujemy liczbę znaków, nigdy ich treść. W oknach logowania, bankowych i menedżerów haseł nie czytamy nawet schowka.</p>
+        <p class="priv-d en">We store how many characters, never which ones. In login, banking and password-manager windows we do not even read the clipboard.</p>
+      </div>
+      <div class="rev rev-d4">
+        <div class="priv-no"><span class="pl">Są</span><span class="en">There are</span></div>
+        <div class="priv-t pl">Wykluczenia u pracownika</div>
+        <div class="priv-t en">Employee exclusions</div>
+        <p class="priv-d pl">Sam wskazuje programy, których nie chce pokazywać. Wykluczone okno nie trafia nigdzie — ani do zapisu na jego komputerze, ani na panel.</p>
+        <p class="priv-d en">They name the programs they would rather not show. An excluded window goes nowhere — not into the log on their computer, and not to the dashboard.</p>
+      </div>
+    </div>
+
+    <p class="priv-foot">
+      <span class="pl">Pełna lista tego, co zostaje na komputerze i co wychodzi na panel — w <a href="/prywatnosc.html">polityce prywatności</a>.</span>
+      <span class="en">The full list of what stays on the computer and what reaches the dashboard is in the <a href="/prywatnosc.html">privacy policy</a>.</span>
+    </p>
   </div>
 </div>
 
@@ -987,7 +1159,7 @@ You install ProcessMiner at your client and for 10 working days the AI watches h
         <span class="duo-tag pl">idzie do klienta</span>
         <span class="duo-tag en">goes to your client</span>
         <div class="duo-h pl">Aplikacja</div>
-        <div class="duo-h en">Desktop app</div>
+        <div class="duo-h en">The app</div>
         <p class="duo-lead pl">Wysyłasz link, pracownicy klienta instalują ją u siebie.</p>
         <p class="duo-lead en">You send a link and your client's employees install it themselves.</p>
         <ul class="duo-list">
