@@ -663,6 +663,21 @@
     .priv-foot a { color:var(--blue); text-decoration:none; }
     .priv-foot a:hover { text-decoration:underline; }
 
+    /* ─── CENNIK ─── */
+    .price-wrap { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; margin-top:48px; }
+    .price-card {
+      background:var(--white); border:1px solid var(--border); border-radius:20px;
+      padding:38px 40px; box-shadow:0 1px 3px rgba(15,23,42,0.04);
+    }
+    .price-n { display:flex; align-items:baseline; gap:10px; }
+    .price-amount { font-size:3.25rem; font-weight:800; letter-spacing:-0.045em; color:var(--ink); line-height:1; }
+    .price-per { font-size:1rem; color:var(--ink-light); }
+    .price-note { font-size:0.8125rem; color:var(--ink-light); margin-top:10px; }
+    .price-list { list-style:none; margin:28px 0 0; padding:0; display:flex; flex-direction:column; gap:13px; }
+    .price-list li { display:flex; gap:11px; align-items:flex-start; font-size:0.9375rem; color:var(--ink-mid); line-height:1.6; }
+    .price-list svg { flex-shrink:0; margin-top:3px; color:var(--blue); }
+    .price-cta { margin-top:30px; }
+
     /* ─── RESPONSIVE ─── */
     @media(max-width:1100px){
       .steps { grid-template-columns: repeat(2,1fr); gap: 32px; }
@@ -681,6 +696,7 @@
       .steps::before { display:none; }
       .features { grid-template-columns:1fr; }
       .miss-grid { grid-template-columns:1fr; gap:36px; }
+      .price-wrap { grid-template-columns:1fr; gap:36px; }
       .priv-head { grid-template-columns:1fr; gap:20px; align-items:start; }
       .priv-grid { grid-template-columns:repeat(2,1fr); gap:28px; }
       .duo { grid-template-columns:1fr; }
@@ -728,7 +744,8 @@
       <a href="#panel" class="nav-link"><span class="pl">Panel i aplikacja</span><span class="en">Dashboard &amp; app</span></a>
       <a href="#features" class="nav-link"><span class="pl">Funkcje</span><span class="en">Features</span></a>
       <a href="#demo" class="nav-link">Demo</a>
-<a href="#faq" class="nav-link">FAQ</a>
+<a href="#cennik" class="nav-link"><span class="pl">Cennik</span><span class="en">Pricing</span></a>
+      <a href="#faq" class="nav-link">FAQ</a>
       <a href="/prywatnosc.html" class="nav-link"><span class="pl">Prywatność</span><span class="en">Privacy</span></a>
     </nav>
     <div class="nav-right">
@@ -1349,6 +1366,55 @@ Before you quote, look at the data: which activities come back every week, how o
       <div class="stat-n emerald"><span>0</span></div>
       <div class="stat-l pl">zrzutów ekranu<br><strong>i zapisanych znaków</strong></div>
       <div class="stat-l en">screenshots taken<br><strong>and characters stored</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CENNIK ─── -->
+<div id="cennik" class="sec-bg">
+  <div class="wrap">
+    <div class="sec">
+      <div class="rev">
+        <div class="sec-eyebrow">
+          <span class="pl">Cennik</span>
+          <span class="en">Pricing</span>
+        </div>
+        <h2 class="sec-h2 pl">Jedna cena.<br><em>Dowolna liczba klientów.</em></h2>
+        <h2 class="sec-h2 en">One price.<br><em>As many clients as you like.</em></h2>
+        <p class="sec-sub pl">Płacisz za licencję dla agencji, nie za każde wdrożenie. Drugi klient kosztuje tyle samo co dziesiąty — czyli nic.</p>
+        <p class="sec-sub en">You pay for an agency licence, not per deployment. Your second client costs the same as your tenth — nothing.</p>
+      </div>
+
+      <div class="price-wrap">
+        <div class="price-card rev rev-d1">
+          <div class="price-n">
+            <span class="price-amount">$97</span>
+            <span class="price-per pl">/ miesiąc</span>
+            <span class="price-per en">/ month</span>
+          </div>
+          <p class="price-note pl">za agencję, nie za klienta · orientacyjnie ok. 390 zł, zależnie od kursu</p>
+          <p class="price-note en">per agency, not per client</p>
+
+          <ul class="price-list">
+            <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Dowolna liczba klientów agencji</span><span class="en">As many of your clients as you want</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Osobna przestrzeń na każdego klienta w panelu</span><span class="en">A separate space for each client in the dashboard</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Aplikacja dla pracowników klienta, z aktualizacjami</span><span class="en">The app for your client's employees, updates included</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pl">Propozycje generowane przez AI, bez dopłat za sztukę</span><span class="en">AI-generated proposals, with no per-proposal charge</span></li>
+          </ul>
+
+          <div class="price-cta">
+            <a href="#demo" class="btn" style="font-size:0.9375rem;padding:12px 24px;">
+              <span class="pl">Umów demo →</span>
+              <span class="en">Book a demo →</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="rev rev-d2">
+          <p class="sec-sub pl" style="max-width:none;">Jedno wdrożenie u klienta trwa dziesięć dni roboczych. Jeśli z backlogu, który z niego wyjdzie, sprzedasz choć jedną automatyzację, licencja zwraca się wielokrotnie — i to samo narzędzie pracuje jednocześnie u pozostałych Twoich klientów.</p>
+          <p class="sec-sub en" style="max-width:none;">One deployment at a client takes ten working days. If the backlog it produces sells even a single automation, the licence pays for itself many times over — and the same tool is running at the rest of your clients at the same time.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
