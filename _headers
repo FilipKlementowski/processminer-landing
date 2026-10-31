@@ -1,0 +1,17 @@
+# Nagłówki serwowane przez Netlify dla każdej podstrony.
+# Strona nie miała żadnych, więc przeglądarka nie była niczym ograniczona.
+#
+# script-src wymienia z nazwy jedyną obcą domenę, z której strona wykonuje
+# kod: cdn.tailwindcss.com. Dzięki temu żaden inny zewnętrzny skrypt się nie
+# uruchomi — także taki wstrzyknięty później. Samego Tailwinda nie da się
+# stąd usunąć: strona opiera układ na jego resecie CSS, więc wyrzucenie go
+# wymaga najpierw skompilowania arkusza i podmiany, co jest osobną robotą.
+#
+# 'unsafe-inline' zostaje, bo strona ma własne skrypty i style wpisane
+# w HTML. Żeby je stąd wyrzucić, trzeba by je przenieść do osobnych plików.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://app.processminer.pl https://processminerdashboard-production.up.railway.app; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
